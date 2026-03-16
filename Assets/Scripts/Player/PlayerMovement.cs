@@ -3,14 +3,17 @@ using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    [SerializeField] private float horizontalSpeed;
+    [SerializeField] private float verticalSpeed;
     [Header("References")]
     [SerializeField] private Tilemap walls;
     [SerializeField] private Rigidbody2D rb;
 
+    private float _currentSpeed;
+
     private Vector2 _inputDir;
     private Vector2 _lastInputDir;
-    private Vector2 _dir;
+    private Vector2 _dir = Vector2.right;
 
     private Vector3 center;
 
@@ -25,7 +28,10 @@ public class PlayerMovement : MonoBehaviour
         _inputDir = InputManager.instance.input.Player.Move.ReadValue<Vector2>();
         if (_inputDir != Vector2.zero)
         {
-            _lastInputDir = Vector3.Normalize(_inputDir);
+            if (!(_inputDir.x != 0 && _inputDir.y != 0))
+            {
+                _lastInputDir = Vector3.Normalize(_inputDir);                
+            }
         }
 
         _currentCell = walls.WorldToCell(rb.position);
@@ -42,17 +48,27 @@ public class PlayerMovement : MonoBehaviour
             _nextCellDir = _currentCell + Vector3Int.RoundToInt(_dir);
             _canMove = !walls.HasTile(_nextCellDir);
         }
+
+        if (_dir.y != 0)
+        {
+            _currentSpeed = verticalSpeed;
+        }
+        else
+        {
+            _currentSpeed = horizontalSpeed;
+        }
     }
     private void FixedUpdate()
     {
         if (_canMove)
         {
             Vector3 nextCenter = walls.GetCellCenterWorld(_nextCellDir);
-            rb.position = Vector3.MoveTowards(rb.position, nextCenter, speed * Time.deltaTime);
+            rb.position = Vector3.MoveTowards(rb.position, nextCenter, _currentSpeed * Time.deltaTime);
         }
         else
         {
-            rb.position = Vector3.MoveTowards(rb.position, center, speed * Time.deltaTime);
+            Vector3 nextCenter = walls.GetCellCenterWorld(_nextCellDir);
+            rb.position = Vector3.MoveTowards(rb.position, center, _currentSpeed * Time.deltaTime);
         }
     }
 }

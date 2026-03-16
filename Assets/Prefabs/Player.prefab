@@ -106,7 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2c6f8d53d73bd14eba9fe7c64a9bb44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  speed: 5
+  horizontalSpeed: 5
+  verticalSpeed: 7
   walls: {fileID: 0}
   rb: {fileID: -6803576514054023710}
 --- !u!61 &608921721308992597
