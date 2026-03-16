@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _currentSpeed = horizontalSpeed;
         }
-    }
+    } 
     private void FixedUpdate()
     {
         if (_canMove)

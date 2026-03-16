@@ -10,6 +10,7 @@ public class PlayerCollision : MonoBehaviour
         GameObject other = collision.gameObject;
         if (other.TryGetComponent(out IPickable pickable))
         {
+            Debug.Log("pellettt");
             pickable.Pickup();
             player.Score += pickable.PickScore;
         }
