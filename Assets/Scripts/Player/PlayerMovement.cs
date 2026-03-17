@@ -1,74 +1,67 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float horizontalSpeed;
-    [SerializeField] private float verticalSpeed;
+    [Header("Settings")]
+    [SerializeField] private float speed;
     [Header("References")]
-    [SerializeField] private Tilemap walls;
-    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Tilemap wallsTilemap;
 
-    private float _currentSpeed;
-
-    private Vector2 _inputDir;
-    private Vector2 _lastInputDir;
-    private Vector2 _dir = Vector2.right;
-
-    private Vector3 center;
-
-    private Vector3Int _currentCell;
-    private Vector3Int _nextCellDir;
-    private Vector3Int _nextCellInput;
-
+    private Rigidbody2D rb2D;
     private bool _canMove;
 
+    private Vector2 _inputDirection;
+    private Vector2 _direction;
+
+    private Vector3Int _currentTile;
+    private Vector3 _currentTileCenter;
+    private Vector3Int _nextInputTile;
+    private Vector3Int _nextTile;
+    private Vector3 _nextTileCenter;
+
+    private void Awake()
+    {
+        rb2D = GetComponent<Rigidbody2D>();
+    }
     private void Update()
     {
-        _inputDir = InputManager.instance.input.Player.Move.ReadValue<Vector2>();
-        if (_inputDir != Vector2.zero)
+        Vector2 move = InputManager.instance.input.Player.Move.ReadValue<Vector2>();
+        if (move != Vector2.zero)
         {
-            if (!(_inputDir.x != 0 && _inputDir.y != 0))
+            if (!(move.x != 0 && move.y != 0))
             {
-                _lastInputDir = Vector3.Normalize(_inputDir);                
+                _inputDirection = move;
+                Debug.Log(_inputDirection);
             }
         }
 
-        _currentCell = walls.WorldToCell(rb.position);
+        _currentTile = wallsTilemap.WorldToCell(rb2D.position);
+        _currentTileCenter = wallsTilemap.GetCellCenterWorld(_currentTile);
 
-        _nextCellInput = _currentCell + Vector3Int.RoundToInt(_lastInputDir);
-        if (!walls.HasTile(_nextCellInput))
+        _nextInputTile = wallsTilemap.WorldToCell(_currentTileCenter + (Vector3)_inputDirection);
+        if (Vector2.Distance(rb2D.position, _currentTileCenter) <= 0.001f)
         {
-            _dir = _lastInputDir;
-        }
+            if (!wallsTilemap.HasTile(_nextInputTile))
+            {
+                _direction = _inputDirection;
+            }
 
-        center = walls.GetCellCenterWorld(_currentCell);
-        if (Vector3.Distance(rb.position, center) <= 0.001f)
-        {
-            _nextCellDir = _currentCell + Vector3Int.RoundToInt(_dir);
-            _canMove = !walls.HasTile(_nextCellDir);
+            _nextTile =  wallsTilemap.WorldToCell(_currentTileCenter + (Vector3)_direction);
+            _canMove = !wallsTilemap.HasTile(_nextTile);
         }
-
-        if (_dir.y != 0)
-        {
-            _currentSpeed = verticalSpeed;
-        }
-        else
-        {
-            _currentSpeed = horizontalSpeed;
-        }
-    } 
+        _nextTileCenter = wallsTilemap.GetCellCenterWorld(_nextTile);
+    }
     private void FixedUpdate()
     {
         if (_canMove)
         {
-            Vector3 nextCenter = walls.GetCellCenterWorld(_nextCellDir);
-            rb.position = Vector3.MoveTowards(rb.position, nextCenter, _currentSpeed * Time.deltaTime);
+            rb2D.position = Vector2.MoveTowards(rb2D.position, _nextTileCenter, speed * Time.fixedDeltaTime);
         }
         else
         {
-            Vector3 nextCenter = walls.GetCellCenterWorld(_nextCellDir);
-            rb.position = Vector3.MoveTowards(rb.position, center, _currentSpeed * Time.deltaTime);
+            rb2D.position = Vector2.MoveTowards(rb2D.position, _currentTileCenter, speed * Time.fixedDeltaTime);
         }
     }
 }
