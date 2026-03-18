@@ -1,11 +1,12 @@
-using TMPro;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI scoreDisplay;
     [Header("References")]
     [SerializeField] private PlayerManager playerManager;
+
+    private List<Pellet> _pellets = new();
 
     private void OnEnable()
     {
@@ -18,6 +19,9 @@ public class UIManager : MonoBehaviour
 
     private void OnScoreChanged(int score)
     {
-        scoreDisplay.text = $"{score}";
+        if (_pellets.Count > 0)
+        {
+            Debug.Log("next level");
+        }
     }
 }

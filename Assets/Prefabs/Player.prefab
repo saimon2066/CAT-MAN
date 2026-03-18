@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3944257720120653800}
   - component: {fileID: 3315934918108158194}
-  - component: {fileID: -4270765237041281704}
   - component: {fileID: 3021557618874034078}
   - component: {fileID: 2961060590768709437}
   - component: {fileID: 608921721308992597}
@@ -51,20 +50,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementRework
   speed: 5
   wallsTilemap: {fileID: 0}
---- !u!114 &-4270765237041281704
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4455264859461700174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92c3560c978715048b2868d265f2db80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
-  Score: 0
-  Energized: 0
 --- !u!114 &3021557618874034078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 543493fcdf519cb428aa75dbb6efceba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCollision
-  player: {fileID: -4270765237041281704}
+  player: {fileID: 0}
 --- !u!212 &2961060590768709437
 SpriteRenderer:
   serializedVersion: 2
