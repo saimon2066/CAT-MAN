@@ -11,8 +11,8 @@ public class PlayerCollision : MonoBehaviour
 
         if (other.TryGetComponent(out IPickable pickable))
         {
-            pickable.Pickup();
-            playerManager.UpdateScore(10);
+            int score = pickable.Pickup();
+            playerManager.UpdateScore(score);
         }
     }
 }

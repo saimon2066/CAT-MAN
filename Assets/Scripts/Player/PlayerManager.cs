@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    public GameObject Player;
     public int Score;
     public bool Energized;
 

@@ -33,7 +33,6 @@ public class PlayerMovement : MonoBehaviour
             if (!(move.x != 0 && move.y != 0))
             {
                 _inputDirection = move;
-                Debug.Log(_inputDirection);
             }
         }
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5119016616861595270}
   - component: {fileID: 9207892130104504943}
   m_Layer: 0
-  m_Name: Pellet
+  m_Name: Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,3 +151,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a345b5408601df4d9b6b9e3f582a599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pellet
+  spriteRenderer: {fileID: 407973624923987671}
+  Score: 0

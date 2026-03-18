@@ -1,5 +1,5 @@
 public interface IPickable
 {
-    public void Pickup();
+    public int Pickup();
 }
 ;
