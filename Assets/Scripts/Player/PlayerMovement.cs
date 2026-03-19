@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -8,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed;
     [Header("References")]
     [SerializeField] private Tilemap wallsTilemap;
+
+    [HideInInspector] public bool IsPaused;
 
     private Rigidbody2D rb2D;
     private bool _canMove;
@@ -56,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_canMove)
         {
+            if (!IsPaused)
             rb2D.position = Vector2.MoveTowards(rb2D.position, _nextTileCenter, speed * Time.fixedDeltaTime);
         }
         else

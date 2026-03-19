@@ -12094,6 +12094,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3944257720120653800, guid: 623e0b8a2c891bd44afd205007e8763f, type: 3}
   m_PrefabInstance: {fileID: 4453351043134738174}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1535103318 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3315934918108158194, guid: 623e0b8a2c891bd44afd205007e8763f, type: 3}
+  m_PrefabInstance: {fileID: 4453351043134738174}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195074350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c50289cd667df4c49910896eed5cbbc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementRework
 --- !u!1001 &1568873703
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13789,6 +13800,7 @@ MonoBehaviour:
   - {fileID: 1320637213}
   fruitSpawn: {fileID: 884960068}
   playerManager: {fileID: 1919039124}
+  SpawnedItems: []
 --- !u!1001 &1858363083
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14334,6 +14346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c3560c978715048b2868d265f2db80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
+  playerMovement: {fileID: 1535103318}
   Player: {fileID: 195074350}
   Score: 0
   Energized: 0

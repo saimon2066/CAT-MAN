@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    [SerializeField] private PlayerMovement playerMovement;
     public GameObject Player;
     public int Score;
     public bool Energized;
@@ -13,5 +14,9 @@ public class PlayerManager : MonoBehaviour
     {
         Score += newScore;
         ScoreChanged?.Invoke(Score);
+    }
+    public void SetMovement(bool toggle)
+    {
+        playerMovement.IsPaused = !toggle;
     }
 }

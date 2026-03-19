@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,10 +34,10 @@ public class LevelManager : MonoBehaviour
     }
     private void Start()
     {
-        ResetLevel();
+        NextLevel();
     }
 
-    private void ResetLevel()
+    private void NextLevel()
     {
         _currentLevel++;
 
@@ -52,7 +53,18 @@ public class LevelManager : MonoBehaviour
 
             SpawnedItems.Add(item);
         }
-        // add fruits and energizer when 
+        /*foreach (Transform spawn in energizerSpawns)
+        {
+            GameObject obj = Instantiate(itemPrefab, spawn.position, Quaternion.identity, spawn);
+            Item item = obj.GetComponent<Item>();
+
+            obj.name = pellet.DisplayName + $"_{spawn.position}";
+            item.Score = energizer.Score;
+            item.spriteRenderer.sprite = energizer.Sprite;
+            item.levelManager = this;
+
+            SpawnedItems.Add(item);
+        }*/
 
         playerManager.Player.transform.position = playerSpawn.position;
 
@@ -62,7 +74,16 @@ public class LevelManager : MonoBehaviour
     {
         if (SpawnedItems.Count == 0)
         {
-            ResetLevel();
+            StartCoroutine(NextLevelCorot());
         }
+    }
+
+    private IEnumerator NextLevelCorot()
+    {
+        playerManager.SetMovement(false);
+        yield return new WaitForSeconds(2.5f);
+        NextLevel();
+        yield return new WaitForSeconds(2);
+        playerManager.SetMovement(true);
     }
 }
