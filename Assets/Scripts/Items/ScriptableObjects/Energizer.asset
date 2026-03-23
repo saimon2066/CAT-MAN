@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1160c4bf26b95e4c8a475218639b02a, type: 3}
-  m_Name: Pellet
+  m_Name: Energizer
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  DisplayName: Pellet
-  Score: 10
-  DoesEnergize: 0
-  Sprite: {fileID: 6351269568852249184, guid: 64cf2ffff083e6f419c97f102e9d145b, type: 3}
+  DisplayName: Energizer
+  Score: 50
+  DoesEnergize: 1
+  Sprite: {fileID: -3803859408928701015, guid: 78e34bd4cabb4ee4d943c71877d7fe3a, type: 3}

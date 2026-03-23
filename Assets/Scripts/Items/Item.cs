@@ -6,8 +6,8 @@ public class Item : MonoBehaviour, IPickable
     public SpriteRenderer spriteRenderer;
     
     [HideInInspector] public LevelManager levelManager;
-
     [HideInInspector] public int Score;
+    [HideInInspector] public bool DoesEnergize;
 
     public int Pickup()
     {

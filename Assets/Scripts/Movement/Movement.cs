@@ -1,41 +1,42 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(GhostAI))]
-public class GhostMovement : MonoBehaviour
+[RequireComponent(typeof(Rigidbody2D))]
+public class Movement : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private float speed;
     [Header("References")]
     public Tilemap wallsTilemap;
-    [SerializeField] private GhostAI ai;
+    [SerializeField] private Rigidbody2D Rb2D;
 
     [HideInInspector] public bool IsPaused;
 
-    public Rigidbody2D Rb2D;
     private bool _canMove;
 
-    private Vector2 _directionAI;
+    private Vector2 _inputDirection;
     private Vector2 _direction;
 
-    public Vector3Int _currentTile;
+    [HideInInspector] public Vector3Int CurrentTile;
     private Vector3 _currentTileCenter;
     private Vector3Int _nextInputTile;
     private Vector3Int _nextTile;
     private Vector3 _nextTileCenter;
 
+    [HideInInspector] public bool CloseToCenter;
+
     private void Update()
     {
-        _currentTile = wallsTilemap.WorldToCell(Rb2D.position);
-        _currentTileCenter = wallsTilemap.GetCellCenterWorld(_currentTile);
+        CurrentTile = wallsTilemap.WorldToCell(Rb2D.position);
+        _currentTileCenter = wallsTilemap.GetCellCenterWorld(CurrentTile);
 
-        _nextInputTile = wallsTilemap.WorldToCell(_currentTileCenter + (Vector3)_directionAI);
-        if (Vector2.Distance(Rb2D.position, _currentTileCenter) <= 0.001f)
+        _nextInputTile = wallsTilemap.WorldToCell(_currentTileCenter + (Vector3)_inputDirection);
+        CloseToCenter = Vector2.Distance(Rb2D.position, _currentTileCenter) <= 0.001f;
+        if (CloseToCenter)
         {
-            //ai.RunAlgorithm();
             if (!wallsTilemap.HasTile(_nextInputTile))
             {
-                _direction = _directionAI;
+                _direction = _inputDirection;
             }
 
             _nextTile =  wallsTilemap.WorldToCell(_currentTileCenter + (Vector3)_direction);
@@ -58,6 +59,6 @@ public class GhostMovement : MonoBehaviour
 
     public void SetDirection(Vector2 dir)
     {
-        _directionAI = dir;
+        _inputDirection = dir;
     }
 }

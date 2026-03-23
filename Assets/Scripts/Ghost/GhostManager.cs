@@ -1,16 +1,25 @@
+using System.Collections;
 using UnityEngine;
 
 public class GhostManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    /*[SerializeField] private GhostAI[] ghosts;
+
+    private void Start()
     {
-        
+        StartCoroutine(GhostUpdateTick());
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator GhostUpdateTick()
     {
-        
-    }
+        WaitForSeconds seconds = new(0.05f);
+        while (true)
+        {
+            yield return seconds;
+            foreach (GhostAI ai in ghosts)
+            {
+                ai.RunAlgorithm();
+            }  
+        }
+    }*/
 }

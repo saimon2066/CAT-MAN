@@ -7,6 +7,9 @@ public class LevelManager : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private Transform playerSpawn;
+    [SerializeField] private GameObject player;
+    [SerializeField] private Transform ghostSpawn;
+    [SerializeField] private GameObject[] ghosts;
     [Header("Items")]
     [SerializeField] private GameObject itemPrefab;
     [SerializeField] private ItemData pellet;
@@ -18,9 +21,10 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Transform fruitSpawn;
     [Header("References")]
     [SerializeField] private PlayerManager playerManager;
+    [SerializeField] private Movement[] movements;
 
     public event Action<int> LevelChanged;
-    public List<Item> SpawnedItems = new();
+    [HideInInspector] public List<Item> SpawnedItems = new();
 
     private int _currentLevel;
 
@@ -43,6 +47,8 @@ public class LevelManager : MonoBehaviour
 
         foreach (Transform spawn in pelletSpawns)
         {
+            //Quaternion rot = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-10f, 10f));
+
             GameObject obj = Instantiate(itemPrefab, spawn.position, Quaternion.identity, spawn);
             Item item = obj.GetComponent<Item>();
 
@@ -53,7 +59,7 @@ public class LevelManager : MonoBehaviour
 
             SpawnedItems.Add(item);
         }
-        /*foreach (Transform spawn in energizerSpawns)
+        foreach (Transform spawn in energizerSpawns)
         {
             GameObject obj = Instantiate(itemPrefab, spawn.position, Quaternion.identity, spawn);
             Item item = obj.GetComponent<Item>();
@@ -62,11 +68,16 @@ public class LevelManager : MonoBehaviour
             item.Score = energizer.Score;
             item.spriteRenderer.sprite = energizer.Sprite;
             item.levelManager = this;
+            item.DoesEnergize = energizer.DoesEnergize;
 
             SpawnedItems.Add(item);
-        }*/
+        }
 
-        playerManager.Player.transform.position = playerSpawn.position;
+        player.transform.position = playerSpawn.position;
+        foreach (GameObject ghost in ghosts)
+        {
+            ghost.transform.position = ghostSpawn.position;
+        }
 
         LevelChanged?.Invoke(_currentLevel);
     }
@@ -77,13 +88,20 @@ public class LevelManager : MonoBehaviour
             StartCoroutine(NextLevelCorot());
         }
     }
+    private void ToggleMovement(bool toggle)
+    {
+        foreach (Movement m in movements)
+        {
+            m.IsPaused = !toggle;
+        }
+    }
 
     private IEnumerator NextLevelCorot()
     {
-        playerManager.SetMovement(false);
+        ToggleMovement(false);
         yield return new WaitForSeconds(2.5f);
         NextLevel();
         yield return new WaitForSeconds(2);
-        playerManager.SetMovement(true);
+        ToggleMovement(true);
     }
 }
