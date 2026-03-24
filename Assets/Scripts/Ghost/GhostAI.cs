@@ -7,6 +7,12 @@ public class GhostAI : MonoBehaviour
     [Header("References")]
     [SerializeField] private Movement movement;
 
+    private enum State
+    {
+        Scatter, Chase, Eaten, Frightened
+    }
+    private State _currentState;
+
     private Vector3Int _destination;
     private Vector2Int[] _directions = {new(0, 1), new(-1, 0), new(0, -1), new(1, 0)}; // Up, Left, Down, Right
 
@@ -82,7 +88,6 @@ public class GhostAI : MonoBehaviour
 
     public void SetDestination(Vector3Int destination)
     {
-        Debug.Log(destination + " " + gameObject.name);
         _destination = destination;
     }
 }

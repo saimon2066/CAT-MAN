@@ -14,8 +14,8 @@ public class Movement : MonoBehaviour
 
     private bool _canMove;
 
-    private Vector2 _inputDirection;
-    private Vector2 _direction;
+    private Vector2Int _inputDirection;
+    [HideInInspector] public Vector2Int Direction;
 
     [HideInInspector] public Vector3Int CurrentTile;
     private Vector3 _currentTileCenter;
@@ -30,16 +30,16 @@ public class Movement : MonoBehaviour
         CurrentTile = wallsTilemap.WorldToCell(Rb2D.position);
         _currentTileCenter = wallsTilemap.GetCellCenterWorld(CurrentTile);
 
-        _nextInputTile = wallsTilemap.WorldToCell(_currentTileCenter + (Vector3)_inputDirection);
+        _nextInputTile = CurrentTile + (Vector3Int)_inputDirection;
         CloseToCenter = Vector2.Distance(Rb2D.position, _currentTileCenter) <= 0.001f;
         if (CloseToCenter)
         {
             if (!wallsTilemap.HasTile(_nextInputTile))
             {
-                _direction = _inputDirection;
+                Direction = _inputDirection;
             }
 
-            _nextTile =  wallsTilemap.WorldToCell(_currentTileCenter + (Vector3)_direction);
+            _nextTile = CurrentTile + (Vector3Int)Direction;
             _canMove = !wallsTilemap.HasTile(_nextTile);
         }
         _nextTileCenter = wallsTilemap.GetCellCenterWorld(_nextTile);
@@ -57,7 +57,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    public void SetDirection(Vector2 dir)
+    public void SetDirection(Vector2Int dir)
     {
         _inputDirection = dir;
     }

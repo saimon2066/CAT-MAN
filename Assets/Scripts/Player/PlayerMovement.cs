@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!(move.x != 0 && move.y != 0))
             {
-                movement.SetDirection(move);
+                movement.SetDirection(Vector2Int.RoundToInt(move));
             }
         }
     }
