@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ed91749e982fb3e40bb8914d4131446c
+guid: 2586bfef76f872e488f76fe69a633e72
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5245122749935796811
-    second: SPR_CherryFish_0
+      213: -8731179973402690219
+    second: SPR_jahoda1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SPR_CherryFish_0
+      name: SPR_jahoda1_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 9
-        width: 22
-        height: 16
+        x: 1
+        y: 4
+        width: 30
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5bdb1c616a49537b0800000000000000
-      internalID: -5245122749935796811
+      spriteID: 55df35fe21e94d680800000000000000
+      internalID: -8731179973402690219
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      SPR_CherryFish_0: -5245122749935796811
+      SPR_jahoda1_0: -8731179973402690219
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

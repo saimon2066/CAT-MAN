@@ -15,4 +15,4 @@ MonoBehaviour:
   DisplayName: Energizer
   Score: 50
   DoesEnergize: 1
-  Sprite: {fileID: -3803859408928701015, guid: 78e34bd4cabb4ee4d943c71877d7fe3a, type: 3}
+  Sprite: {fileID: 7345268832992127226, guid: 04cf64ec8ab3cff48b0cdf528110d837, type: 3}
