@@ -5,7 +5,7 @@ using UnityEngine;
 public class GhostAI : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private Movement movement;
+    public Movement movement;
 
     private enum State
     {
