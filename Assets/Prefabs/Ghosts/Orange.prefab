@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 3944257720120653800}
   - component: {fileID: -6153361955887311822}
   - component: {fileID: -6234543618861352195}
+  - component: {fileID: -1538855689702425724}
   - component: {fileID: 3575479393585793646}
   - component: {fileID: 4112123235962968007}
   - component: {fileID: 2961060590768709437}
-  - component: {fileID: -1538855689702425724}
   m_Layer: 0
   m_Name: Orange
   m_TagString: Untagged
@@ -69,6 +69,21 @@ MonoBehaviour:
   Direction: {x: 0, y: 0}
   CurrentTile: {x: 0, y: 0, z: 0}
   CloseToCenter: 0
+--- !u!114 &-1538855689702425724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455264859461700174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bff7feef979bfe0479a8988675c660ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OrangeGhost
+  scatterTarget: {fileID: 0}
+  player: {fileID: 0}
+  ai: {fileID: -6153361955887311822}
 --- !u!61 &3575479393585793646
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -201,18 +216,3 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &-1538855689702425724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4455264859461700174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bff7feef979bfe0479a8988675c660ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::OrangeGhost
-  scatterTarget: {fileID: 0}
-  player: {fileID: 0}
-  ai: {fileID: -6153361955887311822}

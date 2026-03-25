@@ -1,31 +1,40 @@
 using UnityEngine;
 
-public class BlueGhost : MonoBehaviour
+public class BlueGhost : MonoBehaviour, IGhost
 {
+    [Header("Settings")]
+    [SerializeField] private Transform scatterTarget;
     [Header("References")]
-    [SerializeField] private GameObject debugCircle;
-    [SerializeField] private GameObject debug2;
     [SerializeField] private Movement player;
     [SerializeField] private Movement red;
     [SerializeField] private GhostAI ai;
 
+    private GhostManager.GhostState _state;
+
     private void Update() // dont use update
     {
-        Vector3Int dest;
-        if (player.Direction == new Vector2Int(0, 1))
+        if (_state == GhostManager.GhostState.Chase)
         {
-            Vector3Int point = player.CurrentTile + new Vector3Int(-1, 1, 0);
-            dest = point - (red.CurrentTile - point);
-
-            debug2.transform.position = point;
+            Vector3Int dest;
+            if (player.Direction == new Vector2Int(0, 1))
+            {
+                Vector3Int point = player.CurrentTile + new Vector3Int(-1, 1, 0);
+                dest = point - (red.CurrentTile - point);
+            }
+            else
+            {
+                Vector3Int point = player.CurrentTile + (Vector3Int)player.Direction;
+                dest = point - (red.CurrentTile - point);
+            }
+            ai.SetDestination(dest);
         }
         else
         {
-            Vector3Int point = player.CurrentTile + (Vector3Int)player.Direction;
-            dest = point - (red.CurrentTile - point);
-            debug2.transform.position = point;
+            ai.SetDestination(Vector3Int.RoundToInt(scatterTarget.position));
         }
-        debugCircle.transform.position = player.wallsTilemap.GetCellCenterWorld(dest);
-        ai.SetDestination(dest);
+    }
+    public void UpdateState(GhostManager.GhostState state)
+    {
+        _state = state;
     }
 }

@@ -1,4 +1,4 @@
 public interface IGhost
 {
-    public void Die();
+    public void UpdateState(GhostManager.GhostState state);
 }

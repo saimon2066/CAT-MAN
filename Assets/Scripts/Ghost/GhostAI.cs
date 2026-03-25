@@ -7,12 +7,6 @@ public class GhostAI : MonoBehaviour
     [Header("References")]
     public Movement movement;
 
-    private enum State
-    {
-        Scatter, Chase, Eaten, Frightened
-    }
-    private State _currentState;
-
     private Vector3Int _destination;
     private Vector2Int[] _directions = {new(0, 1), new(-1, 0), new(0, -1), new(1, 0)}; // Up, Left, Down, Right
 
