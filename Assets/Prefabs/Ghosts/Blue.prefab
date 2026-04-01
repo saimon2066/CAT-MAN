@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60d664faa328b0d4dac6ceee85ea1f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GhostAI
-  movement: {fileID: -6234543618861352195}
+  Movement: {fileID: -6234543618861352195}
 --- !u!114 &-6234543618861352195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,10 +81,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62a692b7c9862a74db202df8fd30fdbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlueGhost
-  debugCircle: {fileID: 0}
+  scatterTarget: {fileID: 0}
   player: {fileID: 0}
   red: {fileID: 0}
-  ai: {fileID: 0}
+  ai: {fileID: -6153361955887311822}
 --- !u!61 &3575479393585793646
 BoxCollider2D:
   m_ObjectHideFlags: 0

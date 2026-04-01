@@ -5520,6 +5520,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1535103323}
     - target: {fileID: -396985175770574521, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      propertyPath: showDebug
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -396985175770574521, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: scatterTarget
       value: 
       objectReference: {fileID: 2093081811}
@@ -5729,6 +5733,10 @@ PrefabInstance:
     - target: {fileID: 4455264859461700174, guid: 82b17f281df91594e82f2a47288c1db1, type: 3}
       propertyPath: m_Name
       value: Pink
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455264859461700174, guid: 82b17f281df91594e82f2a47288c1db1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11893,6 +11901,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Orange
       objectReference: {fileID: 0}
+    - target: {fileID: 4455264859461700174, guid: e93a54ae9bd34a54094e6922a7c81dff, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15249,6 +15261,10 @@ PrefabInstance:
     - target: {fileID: 4455264859461700174, guid: 86063448513ef704cba96bc8f2a8b695, type: 3}
       propertyPath: m_Name
       value: Blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455264859461700174, guid: 86063448513ef704cba96bc8f2a8b695, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

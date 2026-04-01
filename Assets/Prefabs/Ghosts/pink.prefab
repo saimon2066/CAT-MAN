@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4112123235962968007}
   - component: {fileID: 2961060590768709437}
   m_Layer: 0
-  m_Name: Pink
+  m_Name: pink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60d664faa328b0d4dac6ceee85ea1f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GhostAI
-  movement: {fileID: -6234543618861352195}
+  Movement: {fileID: -6234543618861352195}
 --- !u!114 &-6234543618861352195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5acddca0efb734e82fa01526b39a5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PinkGhost
+  scatterTarget: {fileID: 0}
   player: {fileID: 0}
   ai: {fileID: -6153361955887311822}
 --- !u!61 &3575479393585793646

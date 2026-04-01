@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60d664faa328b0d4dac6ceee85ea1f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GhostAI
-  movement: {fileID: -6234543618861352195}
+  Movement: {fileID: -6234543618861352195}
 --- !u!114 &-6234543618861352195
 MonoBehaviour:
   m_ObjectHideFlags: 0

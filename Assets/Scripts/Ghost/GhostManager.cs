@@ -23,7 +23,7 @@ public class GhostManager : MonoBehaviour
 
     public enum GhostState
     {
-        Chase, Scatter
+        Chase, Scatter, Frightened, Eaten
     }
 
     private readonly Phase[][] _phaseTable =
@@ -46,7 +46,7 @@ public class GhostManager : MonoBehaviour
             new(GhostState.Scatter, 7f),
             new(GhostState.Chase, 20f),
             new(GhostState.Scatter, 5f),
-            new(GhostState.Chase, 1033.14f),
+            new(GhostState.Chase, 1000f),
             new(GhostState.Scatter, 0.01f),
             new(GhostState.Chase, float.MaxValue)
         },
@@ -95,9 +95,7 @@ public class GhostManager : MonoBehaviour
                         ghost.UpdateState(phase.State);   
                     }
                 }
-                Debug.Log(phase.Time + " " + phase.State);
                 yield return new WaitForSeconds(phase.Time);
-                Debug.Log("end");
             }
         }
         else if (level <= 4)

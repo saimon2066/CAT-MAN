@@ -14,7 +14,7 @@ public class OrangeGhost : MonoBehaviour, IGhost
     {
         if (_state == GhostManager.GhostState.Chase)
         {
-            if (Vector3Int.Distance(player.CurrentTile, ai.movement.CurrentTile) < 8)
+            if (Vector3Int.Distance(player.CurrentTile, ai.Movement.CurrentTile) < 8)
             {
                 ai.SetDestination(Vector3Int.RoundToInt(scatterTarget.position));
             }
