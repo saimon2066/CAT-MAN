@@ -20,6 +20,7 @@ public class GhostManager : MonoBehaviour
     [SerializeField] private LevelManager levelManager;
 
     private Coroutine _phaseCorot;
+    private bool _isPaused;
 
     public enum GhostState
     {
@@ -82,48 +83,83 @@ public class GhostManager : MonoBehaviour
         _phaseCorot = StartCoroutine(PhaseCorot(level));
     }
 
+    public void SetPause(bool isPaused)
+    {
+        _isPaused = isPaused;
+    }
+
     private IEnumerator PhaseCorot(int level)
     {
         if (level <= 1)
         {
             foreach (Phase phase in _phaseTable[0])
             {
-                foreach (MonoBehaviour mono in ghosts)
+                float elapsed = 0f;
+                while (elapsed < phase.Time)
                 {
-                    if (mono.TryGetComponent(out IGhost ghost))
+                    if (!_isPaused)
                     {
-                        ghost.UpdateState(phase.State);   
+                        elapsed += Time.deltaTime;
+
+                        foreach (MonoBehaviour mono in ghosts)
+                        {
+                            if (mono.TryGetComponent(out IGhost ghost))
+                            {
+                                ghost.UpdateState(phase.State);
+                            }
+                        }
                     }
+
+                    yield return null;
                 }
-                yield return new WaitForSeconds(phase.Time);
             }
         }
         else if (level <= 4)
         {
             foreach (Phase phase in _phaseTable[1])
             {
-                foreach (MonoBehaviour mono in ghosts)
+                float elapsed = 0f;
+                while (elapsed < phase.Time)
                 {
-                    if (mono.TryGetComponent(out IGhost ghost))
+                    if (!_isPaused)
                     {
-                        ghost.UpdateState(phase.State);   
+                        elapsed += Time.deltaTime;
+
+                        foreach (MonoBehaviour mono in ghosts)
+                        {
+                            if (mono.TryGetComponent(out IGhost ghost))
+                            {
+                                ghost.UpdateState(phase.State);
+                            }
+                        }
                     }
+
+                    yield return null;
                 }
-                yield return new WaitForSeconds(phase.Time);
             }
         }
         else
         {
-            foreach (Phase phase in _phaseTable[2])
+            foreach (Phase phase in _phaseTable[3])
             {
-                foreach (MonoBehaviour mono in ghosts)
+                float elapsed = 0f;
+                while (elapsed < phase.Time)
                 {
-                    if (mono.TryGetComponent(out IGhost ghost))
+                    if (!_isPaused)
                     {
-                        ghost.UpdateState(phase.State);   
+                        elapsed += Time.deltaTime;
+
+                        foreach (MonoBehaviour mono in ghosts)
+                        {
+                            if (mono.TryGetComponent(out IGhost ghost))
+                            {
+                                ghost.UpdateState(phase.State);
+                            }
+                        }
                     }
+
+                    yield return null;
                 }
-                yield return new WaitForSeconds(phase.Time);
             }
         }
     }

@@ -3,6 +3,7 @@ using UnityEngine;
 public class PinkGhost : MonoBehaviour, IGhost
 {
     [Header("Settings")]
+    [SerializeField] private bool showDebug;
     [SerializeField] private Transform scatterTarget;
     [Header("References")]
     [SerializeField] private Movement player;
@@ -10,24 +11,43 @@ public class PinkGhost : MonoBehaviour, IGhost
 
     private GhostManager.GhostState _state;
 
-    private void Update() // dont use update
+    private void Update()
     {
-        if (_state == GhostManager.GhostState.Chase)
+        if (_state == GhostManager.GhostState.Frightened)
         {
+            ai.SetRandomization(true);
+        }
+        else
+        {
+            ai.SetRandomization(false);
+                
             Vector3Int dest;
-            if (player.Direction == new Vector2Int(0, 1))
+            if (_state == GhostManager.GhostState.Chase)
             {
-                dest = player.CurrentTile + new Vector3Int(-2, 2, 0);
+                if (player.Direction == new Vector2Int(0, 1))
+                {
+                    dest = player.CurrentTile + new Vector3Int(-2, 2, 0);
+                }
+                else
+                {
+                    dest = player.CurrentTile + (Vector3Int)player.Direction * 2;
+                }
+            }
+            else if (_state == GhostManager.GhostState.Scatter)
+            {
+                dest = Vector3Int.RoundToInt(scatterTarget.position);
             }
             else
             {
-                dest = player.CurrentTile + (Vector3Int)player.Direction * 2;
+                dest = Vector3Int.zero;
             }
+
             ai.SetDestination(dest);
-        }
-        else if (_state == GhostManager.GhostState.Scatter)
-        {
-            ai.SetDestination(Vector3Int.RoundToInt(scatterTarget.position));
+
+            if (showDebug)
+            {
+                Debug.DrawLine(ai.Movement.wallsTilemap.GetCellCenterWorld(ai.Movement.CurrentTile), ai.Movement.wallsTilemap.GetCellCenterWorld(dest), Color.hotPink, Time.deltaTime);
+            }   
         }
     }
     public void UpdateState(GhostManager.GhostState state)

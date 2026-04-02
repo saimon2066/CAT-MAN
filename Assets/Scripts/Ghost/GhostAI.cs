@@ -15,7 +15,7 @@ public class GhostAI : MonoBehaviour
 
     private bool _randomize;
 
-    public void Update()
+    private void Update()
     {
         if (Movement.CloseToCenter && Movement.CurrentTile != _lastTile)
         {
@@ -24,7 +24,7 @@ public class GhostAI : MonoBehaviour
         }
     }
 
-    public void RunAlgorithm()
+    private void RunAlgorithm()
     {
         Dictionary<Vector2Int, float> possibleDirectionsAndDistance = GetPossibleDirectionsAndDistance();
 

@@ -3,6 +3,7 @@ using UnityEngine;
 public class OrangeGhost : MonoBehaviour, IGhost
 {
     [Header("Settings")]
+    [SerializeField] private bool showDebug;
     [SerializeField] private Transform scatterTarget;
     [Header("References")]
     [SerializeField] private Movement player;
@@ -10,24 +11,46 @@ public class OrangeGhost : MonoBehaviour, IGhost
 
     private GhostManager.GhostState _state;
 
-    private void Update() // dont use update
+    private void Update()
     {
-        if (_state == GhostManager.GhostState.Chase)
+        if (_state == GhostManager.GhostState.Frightened)
         {
-            if (Vector3Int.Distance(player.CurrentTile, ai.Movement.CurrentTile) < 8)
+            ai.SetRandomization(true);
+        }
+        else
+        {
+            ai.SetRandomization(false);
+
+            Vector3Int dest;
+            if (_state == GhostManager.GhostState.Chase)
             {
-                ai.SetDestination(Vector3Int.RoundToInt(scatterTarget.position));
+                if (Vector3Int.Distance(player.CurrentTile, ai.Movement.CurrentTile) < 8)
+                {
+                    dest = Vector3Int.RoundToInt(scatterTarget.position);
+                }
+                else
+                {
+                    dest = player.CurrentTile;
+                }
+            }
+            else if (_state == GhostManager.GhostState.Scatter)
+            {
+                dest = Vector3Int.RoundToInt(scatterTarget.position);
             }
             else
             {
-                ai.SetDestination(player.CurrentTile);
+                dest = Vector3Int.zero;
             }
-        }
-        else if (_state == GhostManager.GhostState.Scatter)
-        {
-            ai.SetDestination(Vector3Int.RoundToInt(scatterTarget.position));
+
+            ai.SetDestination(dest);
+
+            if (showDebug)
+            {
+                Debug.DrawLine(ai.Movement.wallsTilemap.GetCellCenterWorld(ai.Movement.CurrentTile), ai.Movement.wallsTilemap.GetCellCenterWorld(dest), Color.orange, Time.deltaTime);
+            }   
         }
     }
+
     public void UpdateState(GhostManager.GhostState state)
     {
         _state = state;

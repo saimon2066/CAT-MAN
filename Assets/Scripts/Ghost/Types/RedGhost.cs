@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class RedGhost : MonoBehaviour, IGhost
 {
@@ -14,12 +13,6 @@ public class RedGhost : MonoBehaviour, IGhost
 
     private void Update()
     {
-        if (Keyboard.current.rKey.isPressed)
-        {
-            _state = GhostManager.GhostState.Frightened;
-            Debug.Log("pressed!");
-        }
-
         if (_state == GhostManager.GhostState.Frightened)
         {
             ai.SetRandomization(true);
