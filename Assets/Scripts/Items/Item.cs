@@ -6,13 +6,13 @@ public class Item : MonoBehaviour, IPickable
     public SpriteRenderer spriteRenderer;
     
     [HideInInspector] public LevelManager levelManager;
-    [HideInInspector] public int Score;
-    [HideInInspector] public bool DoesEnergize;
+    public int Score;
+    public bool DoesEnergize;
 
-    public int Pickup()
+    public (int Score, bool Energized) Pickup()
     {
         levelManager.SpawnedItems.Remove(this);
         Destroy(gameObject);
-        return Score;
+        return (Score, DoesEnergize);
     }
 }

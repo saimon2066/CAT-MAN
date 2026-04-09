@@ -30,11 +30,11 @@ public class LevelManager : MonoBehaviour
 
     private void OnEnable()
     {
-        playerManager.ScoreChanged += OnScoreChanged;
+        playerManager.PlayerScoreChanged += OnPlayerScoreChanged;
     }
     private void OnDisable()
     {
-        playerManager.ScoreChanged -= OnScoreChanged;
+        playerManager.PlayerScoreChanged -= OnPlayerScoreChanged;
     }
     private void Start()
     {
@@ -45,10 +45,15 @@ public class LevelManager : MonoBehaviour
     {
         _currentLevel++;
 
+        SpawnItems();
+        RespawnEveryone();
+
+        LevelChanged?.Invoke(_currentLevel);
+    }
+    private void SpawnItems()
+    {
         foreach (Transform spawn in pelletSpawns)
         {
-            //Quaternion rot = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-10f, 10f));
-
             GameObject obj = Instantiate(itemPrefab, spawn.position, Quaternion.identity, spawn);
             Item item = obj.GetComponent<Item>();
 
@@ -72,20 +77,13 @@ public class LevelManager : MonoBehaviour
 
             SpawnedItems.Add(item);
         }
-
+    }
+    private void RespawnEveryone()
+    {
         player.transform.position = playerSpawn.position;
         foreach (GameObject ghost in ghosts)
         {
             ghost.transform.position = ghostSpawn.position;
-        }
-
-        LevelChanged?.Invoke(_currentLevel);
-    }
-    private void OnScoreChanged(int score)
-    {
-        if (SpawnedItems.Count == 0)
-        {
-            StartCoroutine(NextLevelCorot());
         }
     }
     private void ToggleMovement(bool toggle)
@@ -93,6 +91,14 @@ public class LevelManager : MonoBehaviour
         foreach (Movement m in movements)
         {
             m.IsPaused = !toggle;
+        }
+    }
+
+    private void OnPlayerScoreChanged(int score)
+    {
+        if (SpawnedItems.Count == 0)
+        {
+            StartCoroutine(NextLevelCorot());
         }
     }
 

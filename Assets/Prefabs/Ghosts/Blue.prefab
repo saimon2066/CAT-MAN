@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3575479393585793646}
   - component: {fileID: 4112123235962968007}
   - component: {fileID: 2961060590768709437}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62a692b7c9862a74db202df8fd30fdbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlueGhost
+  showDebug: 0
   scatterTarget: {fileID: 0}
   player: {fileID: 0}
   red: {fileID: 0}
@@ -101,7 +102,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 192
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

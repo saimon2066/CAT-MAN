@@ -12,8 +12,22 @@ public class PlayerCollision : MonoBehaviour
 
         if (other.TryGetComponent(out IPickable pickable))
         {
-            int score = pickable.Pickup();
-            playerManager.UpdateScore(score);
+            var (Score, Energized) = pickable.Pickup();
+            playerManager.UpdateScore(Score);
+            playerManager.UpdateEnergized(Energized);
+        }
+        else if (other.TryGetComponent(out IGhost ghost))
+        {
+            if (playerManager.Energized)
+            {
+                Debug.Log("kill ghost");
+                ghost.UpdateState(GhostManager.GhostState.Eaten);
+                playerManager.UpdateScore(200);
+            }
+            else
+            {
+                Debug.Log($"Death {playerManager.Energized}");
+            }
         }
     }
 }

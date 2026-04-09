@@ -1,5 +1,5 @@
 public interface IPickable
 {
-    public int Pickup();
+    public (int Score, bool Energized) Pickup();
 }
 ;

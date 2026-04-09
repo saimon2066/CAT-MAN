@@ -11,16 +11,16 @@ public class UIManager : MonoBehaviour
 
     private void OnEnable()
     {
-        playerManager.ScoreChanged += OnScoreChanged;
+        playerManager.PlayerScoreChanged += OnPlayerScoreChanged;
         levelManager.LevelChanged += OnLevelChanged;
     }
     private void OnDisable()
     {
-        playerManager.ScoreChanged -= OnScoreChanged;
+        playerManager.PlayerScoreChanged -= OnPlayerScoreChanged;
         levelManager.LevelChanged -= OnLevelChanged;
     }
 
-    private void OnScoreChanged(int score)
+    private void OnPlayerScoreChanged(int score)
     {
         scoreGUI.text = $"{score}";
     }

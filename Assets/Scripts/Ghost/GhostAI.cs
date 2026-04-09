@@ -31,8 +31,9 @@ public class GhostAI : MonoBehaviour
         if (_randomize)
         {
             int rand = Random.Range(0, possibleDirectionsAndDistance.Count - 1);
-            Movement.SetDirection(possibleDirectionsAndDistance.Keys.ElementAt(rand));
-            _lastDirection = possibleDirectionsAndDistance.Keys.ElementAt(rand);   
+            Vector2Int dir = possibleDirectionsAndDistance.Keys.ElementAt(rand);
+            Movement.SetDirection(dir);
+            _lastDirection = dir;   
         }
         else
         {
@@ -103,5 +104,9 @@ public class GhostAI : MonoBehaviour
     public void SetRandomization(bool randomize)
     {
         _randomize = randomize;
+    }
+    public void ClearLastDirection()
+    {
+        _lastDirection = Vector2Int.zero;
     }
 }
