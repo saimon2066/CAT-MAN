@@ -10,7 +10,6 @@ public class GhostAI : MonoBehaviour
     private Vector3Int _destination;
     private Vector2Int[] _directions = {new(0, 1), new(-1, 0), new(0, -1), new(1, 0)}; // Up, Left, Down, Right
 
-    private Vector2Int _lastDirection;
     private Vector3Int _lastTile;
 
     private bool _randomize;
@@ -30,10 +29,9 @@ public class GhostAI : MonoBehaviour
 
         if (_randomize)
         {
-            int rand = Random.Range(0, possibleDirectionsAndDistance.Count - 1);
+            int rand = Random.Range(0, possibleDirectionsAndDistance.Count);
             Vector2Int dir = possibleDirectionsAndDistance.Keys.ElementAt(rand);
             Movement.SetDirection(dir);
-            _lastDirection = dir;   
         }
         else
         {
@@ -58,7 +56,6 @@ public class GhostAI : MonoBehaviour
                     if (allMinimum.Contains(dir))
                     {
                         Movement.SetDirection(dir);
-                        _lastDirection = dir;
                         break;
                     }
                 }
@@ -70,7 +67,6 @@ public class GhostAI : MonoBehaviour
                     if (possibleDirectionsAndDistance.Keys.Contains(dir))
                     {
                         Movement.SetDirection(dir);
-                        _lastDirection = dir;
                         break;  
                     }
                 }
@@ -88,7 +84,7 @@ public class GhostAI : MonoBehaviour
             {
                 float distance = Vector3.Distance(next, _destination);
 
-                if (dir != -_lastDirection)
+                if (dir != -Movement.Direction)
                 {
                     possible.Add(dir, distance);
                 }
@@ -104,9 +100,5 @@ public class GhostAI : MonoBehaviour
     public void SetRandomization(bool randomize)
     {
         _randomize = randomize;
-    }
-    public void ClearLastDirection()
-    {
-        _lastDirection = Vector2Int.zero;
     }
 }

@@ -56,4 +56,9 @@ public class BlueGhost : MonoBehaviour, IGhost
     {
         _state = state;
     }
+
+    public void SetEaten()
+    {
+        
+    }
 }

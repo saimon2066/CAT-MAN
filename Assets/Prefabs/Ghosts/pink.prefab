@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3575479393585793646}
   - component: {fileID: 4112123235962968007}
   - component: {fileID: 2961060590768709437}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Pink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -129,7 +129,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!50 &4112123235962968007
 Rigidbody2D:

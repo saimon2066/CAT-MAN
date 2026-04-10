@@ -18,7 +18,6 @@ public class GhostManager : MonoBehaviour
     [SerializeField] private MonoBehaviour[] ghosts;
     [Header("References")]
     [SerializeField] private LevelManager levelManager;
-    [SerializeField] private PlayerManager playerManager;
 
     private Coroutine _phaseCorot;
     private bool _isPaused;
@@ -27,8 +26,6 @@ public class GhostManager : MonoBehaviour
     {
         Chase, Scatter, Frightened, Eaten
     }
-
-    private GhostState _currentState;
 
     private readonly Phase[][] _phaseTable =
     {
@@ -70,14 +67,11 @@ public class GhostManager : MonoBehaviour
     private void OnEnable()
     {
         levelManager.LevelChanged += OnLevelChanged;
-        playerManager.PlayerEnergizedChanged += OnPlayerEnergizedChanged;
     }
     private void OnDisable()
     {
         levelManager.LevelChanged -= OnLevelChanged;
-        playerManager.PlayerEnergizedChanged -= OnPlayerEnergizedChanged;
     }
-
     private void OnLevelChanged(int level)
     {
         if (_phaseCorot != null)
@@ -87,21 +81,8 @@ public class GhostManager : MonoBehaviour
 
         _phaseCorot = StartCoroutine(PhaseCorot(level));
     }
-    private void OnPlayerEnergizedChanged(bool energized)
-    {
-        SetPause(energized);
 
-        if (energized)
-        {
-            SetGhostsState(GhostState.Frightened);
-        }
-        else
-        {
-            SetGhostsState(_currentState);
-        }
-    }
-
-    private void SetGhostsState(GhostState state)
+    private void UpdateStates(GhostState state)
     {
         foreach (MonoBehaviour mono in ghosts)
         {
@@ -130,8 +111,7 @@ public class GhostManager : MonoBehaviour
                     {
                         elapsed += Time.deltaTime;
 
-                        _currentState = phase.State;
-                        SetGhostsState(phase.State);
+                        UpdateStates(phase.State);
                     }
 
                     yield return null;
@@ -149,8 +129,7 @@ public class GhostManager : MonoBehaviour
                     {
                         elapsed += Time.deltaTime;
 
-                        _currentState = phase.State;
-                        SetGhostsState(phase.State);
+                        UpdateStates(phase.State);
                     }
 
                     yield return null;
@@ -159,7 +138,7 @@ public class GhostManager : MonoBehaviour
         }
         else
         {
-            foreach (Phase phase in _phaseTable[3])
+            foreach (Phase phase in _phaseTable[2])
             {
                 float elapsed = 0f;
                 while (elapsed < phase.Time)
@@ -168,8 +147,7 @@ public class GhostManager : MonoBehaviour
                     {
                         elapsed += Time.deltaTime;
 
-                        _currentState = phase.State;
-                        SetGhostsState(phase.State);
+                        UpdateStates(phase.State);
                     }
 
                     yield return null;

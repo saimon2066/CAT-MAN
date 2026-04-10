@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class RedGhost : MonoBehaviour, IGhost
@@ -17,20 +16,7 @@ public class RedGhost : MonoBehaviour, IGhost
     {
         if (_eaten)
         {
-            if (ai.Movement.CurrentTile == Vector3Int.zero)
-            {
-                _eaten = false;
-                ai.ClearLastDirection();
-            }
-            else
-            {
-                ai.SetDestination(Vector3Int.zero);
-            }
-
-            if (showDebug)
-            {
-                Debug.DrawLine(ai.Movement.wallsTilemap.GetCellCenterWorld(ai.Movement.CurrentTile), ai.Movement.wallsTilemap.GetCellCenterWorld(Vector3Int.zero), Color.red, Time.deltaTime);
-            }
+            
         }
         else
         {
@@ -47,10 +33,14 @@ public class RedGhost : MonoBehaviour, IGhost
                 {
                     dest = player.CurrentTile;
                 }
-                else //if (_state == GhostManager.GhostState.Scatter)
+                else if (_state == GhostManager.GhostState.Scatter)
                 {
                     dest = Vector3Int.RoundToInt(scatterTarget.position);
                 }      
+                else
+                {
+                    dest = Vector3Int.zero;
+                }
                 ai.SetDestination(dest);  
 
                 if (showDebug)
@@ -63,13 +53,10 @@ public class RedGhost : MonoBehaviour, IGhost
 
     public void UpdateState(GhostManager.GhostState state)
     {
-        if (state == GhostManager.GhostState.Eaten)
-        {
-            _eaten = true;
-        }
-        else
-        {
-            _state = state;
-        }
+        _state = state;
+    }
+    public void SetEaten()
+    {
+        
     }
 }

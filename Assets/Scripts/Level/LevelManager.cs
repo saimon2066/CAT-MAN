@@ -24,17 +24,23 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Movement[] movements;
 
     public event Action<int> LevelChanged;
+    public event Action LevelFailed;
     [HideInInspector] public List<Item> SpawnedItems = new();
 
     private int _currentLevel;
 
+    private WaitForSeconds _wait2sec = new(2f);
+    private WaitForSeconds _wait2p5sec = new (2.5f);
+
     private void OnEnable()
     {
         playerManager.PlayerScoreChanged += OnPlayerScoreChanged;
+        playerManager.PlayerDeath += OnPlayerDeath;
     }
     private void OnDisable()
     {
         playerManager.PlayerScoreChanged -= OnPlayerScoreChanged;
+        playerManager.PlayerDeath -= OnPlayerDeath;
     }
     private void Start()
     {
@@ -49,6 +55,19 @@ public class LevelManager : MonoBehaviour
         RespawnEveryone();
 
         LevelChanged?.Invoke(_currentLevel);
+    }
+    private void LevelFail()
+    {
+        LevelFailed?.Invoke();
+        _currentLevel = 0;
+    }
+
+    private void SetMovementPaused(bool isPaused)
+    {
+        foreach (Movement m in movements)
+        {
+            m.IsPaused = isPaused;
+        }
     }
     private void SpawnItems()
     {
@@ -86,12 +105,34 @@ public class LevelManager : MonoBehaviour
             ghost.transform.position = ghostSpawn.position;
         }
     }
-    private void ToggleMovement(bool toggle)
+    private void OnPlayerDeath(int lives)
     {
-        foreach (Movement m in movements)
+        if (lives == 0)
         {
-            m.IsPaused = !toggle;
+            StartCoroutine(LevelFailCorot());
         }
+        else
+        {
+            StartCoroutine(PlayerDeathCorot());
+        }
+    }
+
+    private IEnumerator NextLevelCorot()
+    {
+        SetMovementPaused(true);
+        yield return _wait2p5sec;
+        NextLevel();
+        yield return _wait2sec;
+        SetMovementPaused(false);
+    }
+    private IEnumerator PlayerDeathCorot()
+    {
+        SetMovementPaused(true);
+        yield return _wait2p5sec;
+        RespawnEveryone();
+        yield return _wait2sec;
+        SetMovementPaused(false);
+        LevelChanged?.Invoke(_currentLevel);
     }
 
     private void OnPlayerScoreChanged(int score)
@@ -101,13 +142,13 @@ public class LevelManager : MonoBehaviour
             StartCoroutine(NextLevelCorot());
         }
     }
-
-    private IEnumerator NextLevelCorot()
+    private IEnumerator LevelFailCorot()
     {
-        ToggleMovement(false);
-        yield return new WaitForSeconds(2.5f);
+        SetMovementPaused(true);
+        yield return _wait2p5sec;
+        LevelFail();
+        yield return _wait2sec;
+        SetMovementPaused(false);
         NextLevel();
-        yield return new WaitForSeconds(2);
-        ToggleMovement(true);
     }
 }

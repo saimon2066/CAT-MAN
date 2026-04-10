@@ -4,22 +4,38 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    public int Score;
     public int Lives = 3;
+    public int Score;
     public bool Energized;
 
     public event Action<int> PlayerScoreChanged;
-    public event Action<int> PlayerLivesChanged;
-    public event Action<bool> PlayerEnergizedChanged;
-
-    private Coroutine _energizedCorot;
-    private static WaitForSeconds _wait6Seconds = new(6f);
+    public event Action<int> PlayerDeath;
 
     public void UpdateScore(int score)
     {
         Score += score;
         PlayerScoreChanged?.Invoke(Score);
     }
+    public event Action<int> PlayerLivesChanged;
+    public void Die()
+    {
+        Lives--;
+        PlayerDeath?.Invoke(Lives);
+
+        if (Lives == 0)
+        {
+            Lives = 3;
+            Score = 0;
+            Energized = false;
+
+            PlayerScoreChanged?.Invoke(Score);
+            PlayerDeath?.Invoke(Lives);
+        }
+    }
+    public event Action<bool> PlayerEnergizedChanged;
+
+    private Coroutine _energizedCorot;
+    private static WaitForSeconds _wait6Seconds = new(6f);
     public void UpdateLives(int lives)
     {
         Lives += lives;

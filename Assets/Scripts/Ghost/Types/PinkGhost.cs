@@ -54,4 +54,9 @@ public class PinkGhost : MonoBehaviour, IGhost
     {
         _state = state;
     }
+
+    public void SetEaten()
+    {
+        
+    }
 }

@@ -55,5 +55,10 @@ public class OrangeGhost : MonoBehaviour, IGhost
     {
         _state = state;
     }
+
+    public void SetEaten()
+    {
+        
+    }
 }
 
