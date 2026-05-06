@@ -1,5 +1,6 @@
 public interface IGhost
 {
-    public void UpdateState(GhostManager.GhostState state);
-    public void SetEaten();
+    public void SetState(GhostManager.GhostState state, bool isForced);
+    public void SetPaused(bool paused, GhostManager.GhostState ignoreState = GhostManager.GhostState.None);
+    public void Die();
 }

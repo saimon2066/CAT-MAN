@@ -9,10 +9,10 @@ public class Item : MonoBehaviour, IPickable
     public int Score;
     public bool DoesEnergize;
 
-    public int Pickup()
+    public (int Score, bool DoesEnergize) Pickup()
     {
         levelManager.SpawnedItems.Remove(this);
         Destroy(gameObject);
-        return Score;
+        return (Score, DoesEnergize);
     }
 }

@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private TextMeshProUGUI scoreDisplay;
     [SerializeField] private TextMeshProUGUI livesDisplay;
     [SerializeField] private TextMeshProUGUI levelDisplay;
-    [Header("References")]
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private PlayerManager playerManager;
 
@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour
 
     private void OnPlayerScoreChanged(int score)
     {
-        scoreDisplay.text = $"score: {score}";
+        scoreDisplay.text = $"{score}";
     }
     private void OnPlayerDeath(int lives)
     {

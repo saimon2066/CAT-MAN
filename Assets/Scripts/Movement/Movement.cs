@@ -27,11 +27,11 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
-        CurrentTile = wallsTilemap.WorldToCell(Rb2D.position);
+        CurrentTile = wallsTilemap.WorldToCell(transform.position);
         _currentTileCenter = wallsTilemap.GetCellCenterWorld(CurrentTile);
 
         _nextInputTile = CurrentTile + (Vector3Int)_inputDirection;
-        CloseToCenter = Vector2.Distance(Rb2D.position, _currentTileCenter) <= 0.001f;
+        CloseToCenter = Vector2.Distance(transform.position, _currentTileCenter) <= 0.001f;
         if (CloseToCenter)
         {
             if (!wallsTilemap.HasTile(_nextInputTile))
@@ -60,5 +60,9 @@ public class Movement : MonoBehaviour
     public void SetDirection(Vector2Int dir)
     {
         _inputDirection = dir;
+    }
+    public void FlipDirection()
+    {
+        Direction = -Direction;   
     }
 }

@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GhostAI : MonoBehaviour
 {
     [Header("References")]
     public Movement Movement;
+
+    [HideInInspector] public Vector3Int DoorCell = new(0, 1, 0);
 
     private Vector3Int _destination;
     private Vector2Int[] _directions = {new(0, 1), new(-1, 0), new(0, -1), new(1, 0)}; // Up, Left, Down, Right
@@ -39,7 +42,7 @@ public class GhostAI : MonoBehaviour
 
             foreach (var DirDist in possibleDirectionsAndDistance)
             {
-                float distanceCurrent = Vector3.Distance(Movement.CurrentTile, _destination);
+                float distanceCurrent = Vector3.Distance(Movement.wallsTilemap.CellToWorld(Movement.CurrentTile), Movement.wallsTilemap.CellToWorld(_destination));
                 if (DirDist.Value <= distanceCurrent)
                 {
                     possibleDirectionsByDistance.Add(DirDist.Key, DirDist.Value);
@@ -68,28 +71,38 @@ public class GhostAI : MonoBehaviour
                     {
                         Movement.SetDirection(dir);
                         break;  
-                    }
-                }
+                    }   
+                }   
             }
         }
     }
     private Dictionary<Vector2Int, float> GetPossibleDirectionsAndDistance()
     {
         Dictionary<Vector2Int, float> possible = new();
+        
         foreach (Vector2Int dir in _directions)
         {
             Vector3Int next = Movement.CurrentTile + (Vector3Int)dir;
 
-            if (!Movement.wallsTilemap.HasTile(next))
-            {
-                float distance = Vector3.Distance(next, _destination);
-
-                if (dir != -Movement.Direction)
-                {
-                    possible.Add(dir, distance);
-                }
+            if (!Movement.wallsTilemap.HasTile(next) && dir != -Movement.Direction && next != DoorCell)
+            {                
+                float distance = Vector3.Distance(Movement.wallsTilemap.CellToWorld(next), Movement.wallsTilemap.CellToWorld(_destination));
+                possible.Add(dir, distance);
             }
         }
+
+        if (possible.Count == 0)
+        {
+            Vector2Int reverse = -Movement.Direction;
+            Vector3Int next = Movement.CurrentTile + (Vector3Int)reverse;
+
+            if (!Movement.wallsTilemap.HasTile(next) && next != DoorCell)
+            {
+                float distance = Vector3.Distance(Movement.wallsTilemap.CellToWorld(next), Movement.wallsTilemap.CellToWorld(_destination));
+                possible.Add(reverse, distance);   
+            }
+        }
+
         return possible;
     }
 

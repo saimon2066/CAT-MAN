@@ -18,16 +18,16 @@ public class GhostManager : MonoBehaviour
     [SerializeField] private MonoBehaviour[] ghosts;
     [Header("References")]
     [SerializeField] private LevelManager levelManager;
+    [SerializeField] private PlayerManager playerManager;
 
     private Coroutine _phaseCorot;
-    private bool _isPaused;
 
     public enum GhostState
     {
-        Chase, Scatter, Frightened, Eaten
+        Chase, Scatter, Frightened, Eaten, None
     }
 
-    private readonly Phase[][] _phaseTable =
+    private readonly Phase[][] _phases =
     {
         new Phase[] // Level 1
         {
@@ -67,10 +67,12 @@ public class GhostManager : MonoBehaviour
     private void OnEnable()
     {
         levelManager.LevelChanged += OnLevelChanged;
+        playerManager.PlayerEnergize += OnPlayerEnergize;
     }
     private void OnDisable()
     {
         levelManager.LevelChanged -= OnLevelChanged;
+        playerManager.PlayerEnergize -= OnPlayerEnergize;
     }
     private void OnLevelChanged(int level)
     {
@@ -81,77 +83,64 @@ public class GhostManager : MonoBehaviour
 
         _phaseCorot = StartCoroutine(PhaseCorot(level));
     }
+    private void OnPlayerEnergize(bool energize)
+    {
+        if (energize)
+        {
+            SetGhostStates(GhostState.Frightened, true);
+            SetGhostPaused(true);
+        }
+        else
+        {
+            SetGhostPaused(false, GhostState.Eaten);
+        }
+    }
 
-    private void UpdateStates(GhostState state)
+    private void SetGhostStates(GhostState state, bool isForced)
     {
         foreach (MonoBehaviour mono in ghosts)
         {
             if (mono.TryGetComponent(out IGhost ghost))
             {
-                ghost.UpdateState(state);
+                ghost.SetState(state, isForced);
             }
         }
     }
-
-    public void SetPause(bool isPaused)
+    private void SetGhostPaused(bool pause, GhostState ignoreState = GhostState.None)
     {
-        _isPaused = isPaused;
+        foreach (MonoBehaviour mono in ghosts)
+        {
+            if (mono.TryGetComponent(out IGhost ghost))
+            {
+                ghost.SetPaused(pause, ignoreState);
+            }
+        }
     }
 
     private IEnumerator PhaseCorot(int level)
     {
         if (level <= 1)
         {
-            foreach (Phase phase in _phaseTable[0])
+            foreach (Phase phase in _phases[0])
             {
-                float elapsed = 0f;
-                while (elapsed < phase.Time)
-                {
-                    if (!_isPaused)
-                    {
-                        elapsed += Time.deltaTime;
-
-                        UpdateStates(phase.State);
-                    }
-
-                    yield return null;
-                }
+                SetGhostStates(phase.State, false);
+                yield return new WaitForSeconds(phase.Time);
             }
         }
         else if (level <= 4)
         {
-            foreach (Phase phase in _phaseTable[1])
+            foreach (Phase phase in _phases[1])
             {
-                float elapsed = 0f;
-                while (elapsed < phase.Time)
-                {
-                    if (!_isPaused)
-                    {
-                        elapsed += Time.deltaTime;
-
-                        UpdateStates(phase.State);
-                    }
-
-                    yield return null;
-                }
+                SetGhostStates(phase.State, false);
+                yield return new WaitForSeconds(phase.Time);
             }
         }
         else
         {
-            foreach (Phase phase in _phaseTable[2])
+            foreach (Phase phase in _phases[2])
             {
-                float elapsed = 0f;
-                while (elapsed < phase.Time)
-                {
-                    if (!_isPaused)
-                    {
-                        elapsed += Time.deltaTime;
-
-                        UpdateStates(phase.State);
-                    }
-
-                    yield return null;
-                }
+                SetGhostStates(phase.State, false);
+                yield return new WaitForSeconds(phase.Time);
             }
         }
     }
