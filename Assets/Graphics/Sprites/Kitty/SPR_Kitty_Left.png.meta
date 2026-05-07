@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 3ce8a2e722187bc48ab97f3d5cb24c2b
+guid: 94bd81be472bcf34db79e646e92e8394
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4028173952645877249
-    second: SPR_cat_40_0
+      213: -8673727532001638413
+    second: SPR_Kitty_left_0
   - first:
-      213: -6514667526500836345
-    second: SPR_cat_40_1
+      213: 6066032513274559821
+    second: SPR_Kitty_left_1
   - first:
-      213: 8417226914021675431
-    second: SPR_cat_40_2
+      213: 53822524376997824
+    second: SPR_Kitty_left_2
   - first:
-      213: 3581957774448883994
-    second: SPR_cat_40_3
+      213: 8196459371722187151
+    second: SPR_Kitty_left_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,89 +109,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SPR_cat_40_0
+      name: SPR_Kitty_Left_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 40
-        height: 40
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ff1bf0bd12d0918c0800000000000000
-      internalID: -4028173952645877249
+      spriteID: 19d7339374bd3ca4da2cf0014b376804
+      internalID: -1444637369
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SPR_cat_40_1
+      name: SPR_Kitty_Left_1
       rect:
         serializedVersion: 2
-        x: 40
+        x: 32
         y: 0
-        width: 40
-        height: 40
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 70c152d96604795a0800000000000000
-      internalID: -6514667526500836345
+      spriteID: 8d2e419c270ceb447844ff6766831ea3
+      internalID: 1623341095
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SPR_cat_40_2
+      name: SPR_Kitty_Left_2
       rect:
         serializedVersion: 2
-        x: 80
+        x: 64
         y: 0
-        width: 40
-        height: 40
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7a19e1c284fffc470800000000000000
-      internalID: 8417226914021675431
+      spriteID: e2de11753342acc4a831adfa887c0ee9
+      internalID: 980712999
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SPR_cat_40_3
+      name: SPR_Kitty_Left_3
       rect:
         serializedVersion: 2
-        x: 120
+        x: 96
         y: 0
-        width: 40
-        height: 40
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a19797a2e9ba5b130800000000000000
-      internalID: 3581957774448883994
+      spriteID: bfdfd3838a024414aa581fca609321d5
+      internalID: 1688969227
       vertices: []
       indices: 
       edges: []
@@ -200,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b093aeb683b623a40b9402e437b73285
+    spriteID: 929d83078e959774b8f672789a1d05de
     internalID: 0
     vertices: []
     indices: 
@@ -210,12 +210,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":40.0,"y":40.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      SPR_cat_40_0: -4028173952645877249
-      SPR_cat_40_1: -6514667526500836345
-      SPR_cat_40_2: 8417226914021675431
-      SPR_cat_40_3: 3581957774448883994
+      SPR_Kitty_Left_0: -1444637369
+      SPR_Kitty_Left_1: 1623341095
+      SPR_Kitty_Left_2: 980712999
+      SPR_Kitty_Left_3: 1688969227
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

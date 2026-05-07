@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 64c501cc3e802c84398cde568f3b6fad
+guid: 3289bb0a6d619e740a8ca67e793ebfbd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5126166778914990802
-    second: SPR_cat_gray_bigger_0
+      213: 2170188468631650611
+    second: SPR_Kitty_right_0
   - first:
-      213: -5321839424912886936
-    second: SPR_cat_gray_bigger_1
+      213: 8019145884987060103
+    second: SPR_Kitty_right_1
   - first:
-      213: 8456394307928099333
-    second: SPR_cat_gray_bigger_2
+      213: -1665142352198850001
+    second: SPR_Kitty_right_2
   - first:
-      213: 3657883666396540717
-    second: SPR_cat_gray_bigger_3
+      213: -8919960222681288892
+    second: SPR_Kitty_right_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,51 +109,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SPR_cat_gray_bigger_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e251d5369723cd8b0800000000000000
-      internalID: -5126166778914990802
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SPR_cat_gray_bigger_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 863f5664d370526b0800000000000000
-      internalID: -5321839424912886936
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SPR_cat_gray_bigger_2
+      name: SPR_Kitty_Right_0
       rect:
         serializedVersion: 2
         x: 0
@@ -166,16 +122,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 50a80b4b1d52b5570800000000000000
-      internalID: 8456394307928099333
+      spriteID: 08b214a5e7fc5f64cb68c9e67fc20a38
+      internalID: -1616361371
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SPR_cat_gray_bigger_3
+      name: SPR_Kitty_Right_1
       rect:
         serializedVersion: 2
         x: 32
@@ -188,10 +144,54 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d2fe44570d963c230800000000000000
-      internalID: 3657883666396540717
+      spriteID: 2c874d96d05da6a4ebac33a0618b8e85
+      internalID: -546041273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPR_Kitty_Right_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4a3e7c6be79c4145a942796203d38ee
+      internalID: 211368366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPR_Kitty_Right_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43358b7b0e0381844833d8c68867b678
+      internalID: 1138670008
       vertices: []
       indices: 
       edges: []
@@ -200,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 7cdb5f7c466a23540b8ca7b0e13df4f8
+    spriteID: f2f99ee46bb44f14d82d925c3db2905e
     internalID: 0
     vertices: []
     indices: 
@@ -212,10 +212,10 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      SPR_cat_gray_bigger_0: -5126166778914990802
-      SPR_cat_gray_bigger_1: -5321839424912886936
-      SPR_cat_gray_bigger_2: 8456394307928099333
-      SPR_cat_gray_bigger_3: 3657883666396540717
+      SPR_Kitty_Right_0: -1616361371
+      SPR_Kitty_Right_1: -546041273
+      SPR_Kitty_Right_2: 211368366
+      SPR_Kitty_Right_3: 1138670008
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
