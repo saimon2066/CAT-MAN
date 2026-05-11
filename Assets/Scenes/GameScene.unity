@@ -4418,6 +4418,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 280798083}
     m_Modifications:
     - target: {fileID: -6234543618861352195, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      propertyPath: Speed
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -6234543618861352195, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: wallsTilemap
       value: 
       objectReference: {fileID: 556835975}
@@ -4426,6 +4430,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1535103323}
     - target: {fileID: -396985175770574521, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      propertyPath: baseSpeed
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -396985175770574521, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      propertyPath: eatenSpeed
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -396985175770574521, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: eatenTarget
       value: 
       objectReference: {fileID: 555714724}
@@ -4433,6 +4445,10 @@ PrefabInstance:
       propertyPath: scatterTarget
       value: 
       objectReference: {fileID: 2093081811}
+    - target: {fileID: -396985175770574521, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      propertyPath: frightenedSpeed
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3944257720120653800, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -13722,6 +13738,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1535103330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195074350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8893b40b989592b42b1c43405afe42c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimationManager
+  movement: {fileID: 1535103323}
+  animator: {fileID: 1535103329}
+  playerManager: {fileID: 6239803316708725566}
+  levelManager: {fileID: 1997426675237007849}
 --- !u!1001 &1568873703
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21740,6 +21772,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 280798083}
     m_Modifications:
     - target: {fileID: -722818813446426424, guid: 623e0b8a2c891bd44afd205007e8763f, type: 3}
+      propertyPath: Speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -722818813446426424, guid: 623e0b8a2c891bd44afd205007e8763f, type: 3}
       propertyPath: wallsTilemap
       value: 
       objectReference: {fileID: 556835975}
@@ -21756,6 +21792,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -2129799152, guid: 02f93e608ad41d3488467edb0d1128c6, type: 3}
     - target: {fileID: 2961060590768709437, guid: 623e0b8a2c891bd44afd205007e8763f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2961060590768709437, guid: 623e0b8a2c891bd44afd205007e8763f, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
@@ -21765,15 +21805,15 @@ PrefabInstance:
       objectReference: {fileID: 6239803316708725566}
     - target: {fileID: 3944257720120653800, guid: 623e0b8a2c891bd44afd205007e8763f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3944257720120653800, guid: 623e0b8a2c891bd44afd205007e8763f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3944257720120653800, guid: 623e0b8a2c891bd44afd205007e8763f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3944257720120653800, guid: 623e0b8a2c891bd44afd205007e8763f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21823,6 +21863,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4455264859461700174, guid: 623e0b8a2c891bd44afd205007e8763f, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 1535103330}
     - targetCorrespondingSourceObject: {fileID: 4455264859461700174, guid: 623e0b8a2c891bd44afd205007e8763f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1535103329}

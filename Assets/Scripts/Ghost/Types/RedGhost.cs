@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class RedGhost : MonoBehaviour, IGhost
@@ -10,6 +9,7 @@ public class RedGhost : MonoBehaviour, IGhost
     [SerializeField] private Transform scatterTarget;
     [SerializeField] private Transform eatenTarget;
     [SerializeField] private float cooldown;
+    [SerializeField] private float baseSpeed, eatenSpeed, frightenedSpeed;
     [Header("References")]
     [SerializeField] private Movement player;
     [SerializeField] private GhostAI ai;
@@ -32,21 +32,25 @@ public class RedGhost : MonoBehaviour, IGhost
         switch (_state)
         {
             case GhostManager.GhostState.Chase: 
+                ai.Movement.Speed = baseSpeed;
                 _spriteRenderer.color = color;
                 dest = player.CurrentTile;
                 break;
 
             case GhostManager.GhostState.Scatter:
+                ai.Movement.Speed = baseSpeed;
                 _spriteRenderer.color = color;
                 dest = ai.Movement.wallsTilemap.WorldToCell(scatterTarget.position);
                 break;
 
             case GhostManager.GhostState.Frightened:
+                ai.Movement.Speed = frightenedSpeed;
                 _spriteRenderer.color = Color.blue;
                 dest = null;
                 break;
 
             case GhostManager.GhostState.Eaten:
+                ai.Movement.Speed = eatenSpeed;
                 _spriteRenderer.color = Color.white;
                 dest = ai.Movement.wallsTilemap.WorldToCell(eatenTarget.position);
                 ai.DoorCell = new(0, 100, 0);
@@ -109,14 +113,18 @@ public class RedGhost : MonoBehaviour, IGhost
             SetPaused(true);
         }
     }
+    public GhostManager.GhostState ReturnState()
+    {
+        return _state;
+    }
 
     private WaitForSeconds _wait2Sec = new(2);
     private IEnumerator RespawnCorot()
     {
         ai.DoorCell = new(0, 1, 0);
-        SetPaused(false);
         yield return new WaitForSeconds(cooldown);
         ai.DoorCell = new(0, 100, 0);
+        SetPaused(false);
         yield return _wait2Sec;
         ai.DoorCell = new(0, 1, 0);
     }

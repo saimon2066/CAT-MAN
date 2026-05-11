@@ -87,7 +87,7 @@ public class GhostManager : MonoBehaviour
     {
         if (energize)
         {
-            SetGhostStates(GhostState.Frightened, true);
+            SetGhostStates(GhostState.Frightened, false);
             SetGhostPaused(true);
         }
         else

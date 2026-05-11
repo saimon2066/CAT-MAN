@@ -25,6 +25,8 @@ public class LevelManager : MonoBehaviour
 
     public event Action<int> LevelChanged;
     public event Action LevelFailed;
+    public event Action LevelRespawnEveryone;
+
     [HideInInspector] public List<Item> SpawnedItems = new();
 
     private int _currentLevel;
@@ -99,6 +101,8 @@ public class LevelManager : MonoBehaviour
     }
     private void RespawnEveryone()
     {
+        LevelRespawnEveryone?.Invoke();
+
         player.transform.position = playerSpawn.position;
         foreach (GameObject ghost in ghosts)
         {

@@ -113,6 +113,10 @@ public class BlueGhost : MonoBehaviour, IGhost
             SetPaused(true);
         }
     }
+    public GhostManager.GhostState ReturnState()
+    {
+        return _state;
+    }
 
     private WaitForSeconds _wait2Sec = new(2);
     private IEnumerator RespawnCorot()

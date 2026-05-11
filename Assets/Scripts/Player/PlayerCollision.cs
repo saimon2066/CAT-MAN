@@ -26,7 +26,7 @@ public class PlayerCollision : MonoBehaviour
             {
                 ghost.Die();
             }
-            else
+            else if (ghost.ReturnState() != GhostManager.GhostState.Frightened || ghost.ReturnState() != GhostManager.GhostState.Eaten)
             {
                 playerManager.Die();
             }

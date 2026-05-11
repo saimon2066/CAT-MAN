@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -5,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class Movement : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private float speed;
+    public float Speed;
     [Header("References")]
     public Tilemap wallsTilemap;
     [SerializeField] private Rigidbody2D Rb2D;
@@ -15,7 +16,22 @@ public class Movement : MonoBehaviour
     private bool _canMove;
 
     private Vector2Int _inputDirection;
-    [HideInInspector] public Vector2Int Direction;
+
+    private Vector2Int _direction;
+    [HideInInspector] public Vector2Int Direction
+    {
+        get
+        {
+            return _direction;
+        }
+        set
+        {
+            _direction = value;
+
+            if (!IsPaused)
+                MovementDirectionChanged?.Invoke(_direction);
+        }
+    }
 
     [HideInInspector] public Vector3Int CurrentTile;
     private Vector3 _currentTileCenter;
@@ -24,6 +40,7 @@ public class Movement : MonoBehaviour
     private Vector3 _nextTileCenter;
 
     [HideInInspector] public bool CloseToCenter;
+    public event Action<Vector2Int> MovementDirectionChanged;
 
     private void Update()
     {
@@ -49,11 +66,11 @@ public class Movement : MonoBehaviour
         if (_canMove)
         {
             if (!IsPaused)
-            Rb2D.position = Vector2.MoveTowards(Rb2D.position, _nextTileCenter, speed * Time.fixedDeltaTime);
+            Rb2D.position = Vector2.MoveTowards(Rb2D.position, _nextTileCenter, Speed * Time.fixedDeltaTime);
         }
         else
         {
-            Rb2D.position = Vector2.MoveTowards(Rb2D.position, _currentTileCenter, speed * Time.fixedDeltaTime);
+            Rb2D.position = Vector2.MoveTowards(Rb2D.position, _currentTileCenter, Speed * Time.fixedDeltaTime);
         }
     }
 
