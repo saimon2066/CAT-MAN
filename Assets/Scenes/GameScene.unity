@@ -4430,6 +4430,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1535103323}
     - target: {fileID: -396985175770574521, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      propertyPath: cooldown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -396985175770574521, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: baseSpeed
       value: 4.5
       objectReference: {fileID: 0}
