@@ -76,20 +76,28 @@ public class OrangeGhost : MonoBehaviour, IGhost
         }
     }
 
-    public void SetState(GhostManager.GhostState state, bool isForced)
+    public void SetState(GhostManager.GhostState state, bool isForced, GhostManager.GhostState ignoreState = GhostManager.GhostState.None)
     {
-        if (_state != GhostManager.GhostState.Eaten)
+        if (_state != ignoreState)
         {
-            if (_statesPaused)
-            {
-                _futureState = state;
-            }
-            else
+            if (isForced)
             {
                 ai.Movement.FlipDirection();
                 _state = state;
             }   
-        }  
+            else
+            {
+                if (!_statesPaused)
+                {
+                    ai.Movement.FlipDirection();
+                    _state = state;
+                }  
+                else
+                {
+                    _futureState = state;
+                }
+            }
+        }
     }
     public void SetPaused(bool pause, GhostManager.GhostState ignoreState = GhostManager.GhostState.None)
     {

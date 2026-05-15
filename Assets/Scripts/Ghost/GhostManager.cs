@@ -89,7 +89,7 @@ public class GhostManager : MonoBehaviour
     {
         if (energize)
         {
-            SetGhostStates(GhostState.Frightened, false);
+            SetGhostStates(GhostState.Frightened, false, GhostState.Eaten);
             SetGhostPaused(true);
         }
         else
@@ -98,13 +98,13 @@ public class GhostManager : MonoBehaviour
         }
     }
 
-    private void SetGhostStates(GhostState state, bool isForced)
+    private void SetGhostStates(GhostState state, bool isForced, GhostState ignoreState = GhostState.None)
     {
         foreach (MonoBehaviour mono in ghosts)
         {
             if (mono.TryGetComponent(out IGhost ghost))
             {
-                ghost.SetState(state, isForced);
+                ghost.SetState(state, isForced, ignoreState);
             }
         }
     }

@@ -20,6 +20,7 @@ public class RedGhost : MonoBehaviour, IGhost
     private GhostManager.GhostState _futureState;
 
     private bool _statesPaused;
+    private bool _isRespawning;
 
     private void Awake()
     {
@@ -53,10 +54,13 @@ public class RedGhost : MonoBehaviour, IGhost
                 ai.Movement.Speed = eatenSpeed;
                 _spriteRenderer.color = Color.white;
                 dest = ai.Movement.wallsTilemap.WorldToCell(eatenTarget.position);
-                ai.DoorCell = new(0, 100, 0);
-                if (ai.Movement.CurrentTile == dest)
+                if (!_isRespawning)
                 {
-                    StartCoroutine(RespawnCorot());
+                    ai.DoorCell = new(0, 100, 0);
+                    if (ai.Movement.CurrentTile == dest)
+                    {
+                        StartCoroutine(RespawnCorot());                        
+                    }
                 }
                 break;
 
@@ -77,23 +81,26 @@ public class RedGhost : MonoBehaviour, IGhost
         }
     }
 
-    public void SetState(GhostManager.GhostState state, bool isForced)
+    public void SetState(GhostManager.GhostState state, bool isForced, GhostManager.GhostState ignoreState = GhostManager.GhostState.None)
     {
-        if (isForced)
+        if (_state != ignoreState)
         {
-            ai.Movement.FlipDirection();
-            _state = state;
-        }   
-        else
-        {
-            if (!_statesPaused)
+            if (isForced)
             {
                 ai.Movement.FlipDirection();
                 _state = state;
-            }  
+            }   
             else
             {
-                _futureState = state;
+                if (!_statesPaused)
+                {
+                    ai.Movement.FlipDirection();
+                    _state = state;
+                }  
+                else
+                {
+                    _futureState = state;
+                }
             }
         }
     }
@@ -121,14 +128,16 @@ public class RedGhost : MonoBehaviour, IGhost
         return _state;
     }
 
-    private WaitForSeconds _wait2Sec = new(2);
+    private WaitForSeconds _wait1Sec = new(1);
     private IEnumerator RespawnCorot()
     {
+        _isRespawning = true;
         ai.DoorCell = new(0, 1, 0);
         yield return new WaitForSeconds(cooldown);
-        ai.DoorCell = new(0, 100, 0);
         SetPaused(false);
-        yield return _wait2Sec;
+        ai.DoorCell = new(0, 100, 0);
+        yield return _wait1Sec;
         ai.DoorCell = new(0, 1, 0);
+        _isRespawning = false;
     }
 }
