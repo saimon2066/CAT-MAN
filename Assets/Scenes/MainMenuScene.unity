@@ -1734,8 +1734,8 @@ GameObject:
   - component: {fileID: 1883951841}
   - component: {fileID: 1883951844}
   - component: {fileID: 1883951843}
-  - component: {fileID: 1883951842}
   - component: {fileID: 1883951845}
+  - component: {fileID: 1883951846}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
@@ -1763,19 +1763,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -160}
   m_SizeDelta: {x: 400, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1883951842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1883951840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d9c3ebe36bc77941b564de63b6e5846, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ButtonSceneSwitch
-  sceneName: GameScene
 --- !u!114 &1883951843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1820,9 +1807,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1883951842}
-        m_TargetAssemblyTypeName: ButtonSceneSwitch, Assembly-CSharp
-        m_MethodName: LoadScene
+      - m_Target: {fileID: 1883951846}
+        m_TargetAssemblyTypeName: ButtonQuit, Assembly-CSharp
+        m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1862,6 +1849,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1883951846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883951840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b227aed791313b439e03bae2d46fdf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonQuit
 --- !u!1 &2110708567
 GameObject:
   m_ObjectHideFlags: 0
