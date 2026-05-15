@@ -4431,7 +4431,7 @@ PrefabInstance:
       objectReference: {fileID: 1535103323}
     - target: {fileID: -396985175770574521, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: cooldown
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -396985175770574521, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: baseSpeed
@@ -21809,15 +21809,15 @@ PrefabInstance:
       objectReference: {fileID: 6239803316708725566}
     - target: {fileID: 3944257720120653800, guid: 623e0b8a2c891bd44afd205007e8763f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3944257720120653800, guid: 623e0b8a2c891bd44afd205007e8763f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3944257720120653800, guid: 623e0b8a2c891bd44afd205007e8763f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3944257720120653800, guid: 623e0b8a2c891bd44afd205007e8763f, type: 3}
       propertyPath: m_LocalPosition.x

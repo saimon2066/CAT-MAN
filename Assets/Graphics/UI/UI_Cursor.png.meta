@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: dbfd3b38f3388f94ba1b24241e3e035f
+guid: 910bef28dce4cff4a875933f373891b8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1440574221046528544
-    second: sahur(1)_0
+      213: 8788321149091161163
+    second: UI_Cursor_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sahur(1)_0
+      name: UI_Cursor_0
       rect:
         serializedVersion: 2
-        x: 89
+        x: 1
         y: 0
-        width: 137
-        height: 315
+        width: 14
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0e5cfe1e06d020ce0800000000000000
-      internalID: -1440574221046528544
+      spriteID: b44a1a7c58366f970800000000000000
+      internalID: 8788321149091161163
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      sahur(1)_0: -1440574221046528544
+      UI_Cursor_0: 8788321149091161163
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

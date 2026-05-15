@@ -86,12 +86,15 @@ public class RedGhost : MonoBehaviour, IGhost
         }   
         else
         {
-            _futureState = state;
             if (!_statesPaused)
             {
                 ai.Movement.FlipDirection();
                 _state = state;
             }  
+            else
+            {
+                _futureState = state;
+            }
         }
     }
     public void SetPaused(bool pause, GhostManager.GhostState ignoreState = GhostManager.GhostState.None)

@@ -22,11 +22,11 @@ public class PlayerCollision : MonoBehaviour
         }
         else if (other.TryGetComponent(out IGhost ghost))
         {
-            if (playerManager.Energized)
+            if (playerManager.Energized && ghost.ReturnState() == GhostManager.GhostState.Frightened)
             {
                 ghost.Die();
             }
-            else if (ghost.ReturnState() != GhostManager.GhostState.Frightened || ghost.ReturnState() != GhostManager.GhostState.Eaten)
+            else if (ghost.ReturnState() != GhostManager.GhostState.Frightened && ghost.ReturnState() != GhostManager.GhostState.Eaten)
             {
                 playerManager.Die();
             }

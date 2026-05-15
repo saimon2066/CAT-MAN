@@ -76,6 +76,8 @@ public class GhostManager : MonoBehaviour
     }
     private void OnLevelChanged(int level)
     {
+        SetGhostPaused(false);
+
         if (_phaseCorot != null)
         {
             StopCoroutine(_phaseCorot);
