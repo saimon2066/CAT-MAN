@@ -9,6 +9,7 @@ public class PinkGhost : MonoBehaviour, IGhost
     [SerializeField] private Transform scatterTarget;
     [SerializeField] private Transform eatenTarget;
     [SerializeField] private float cooldown;
+    [SerializeField] private float baseSpeed, eatenSpeed, frightenedSpeed;
     [Header("References")]
     [SerializeField] private Movement player;
     [SerializeField] private GhostAI ai;
@@ -19,6 +20,7 @@ public class PinkGhost : MonoBehaviour, IGhost
     private GhostManager.GhostState _futureState;
 
     private bool _statesPaused;
+    private bool _isRespawning;
 
     private void Awake()
     {
@@ -53,14 +55,21 @@ public class PinkGhost : MonoBehaviour, IGhost
                 break;
 
             case GhostManager.GhostState.Eaten:
+                ai.Movement.Speed = eatenSpeed;
                 _spriteRenderer.color = Color.white;
                 dest = ai.Movement.wallsTilemap.WorldToCell(eatenTarget.position);
-                ai.DoorCell = new(0, 100, 0);
-                if (ai.Movement.CurrentTile == dest)
+                if (!_isRespawning)
                 {
-                    StartCoroutine(RespawnCorot());
+                    ai.DoorCell = new(0, 100, 0);
+                    if (ai.Movement.CurrentTile == dest)
+                    {
+                        StartCoroutine(RespawnCorot());                        
+                    }
                 }
                 break;
+
+            case GhostManager.GhostState.None:
+                return;
         }
 
         ai.SetRandomization(_state == GhostManager.GhostState.Frightened);
@@ -123,14 +132,16 @@ public class PinkGhost : MonoBehaviour, IGhost
         return _state;
     }
 
-    private WaitForSeconds _wait2Sec = new(2);
+    private WaitForSeconds _wait1Sec = new(1);
     private IEnumerator RespawnCorot()
     {
+        _isRespawning = true;
         ai.DoorCell = new(0, 1, 0);
         yield return new WaitForSeconds(cooldown);
         SetPaused(false);
         ai.DoorCell = new(0, 100, 0);
-        yield return _wait2Sec;
+        yield return _wait1Sec;
         ai.DoorCell = new(0, 1, 0);
+        _isRespawning = false;
     }
 }

@@ -4431,11 +4431,15 @@ PrefabInstance:
       objectReference: {fileID: 1535103323}
     - target: {fileID: -396985175770574521, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: cooldown
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -396985175770574521, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: baseSpeed
       value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -396985175770574521, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      propertyPath: showDebug
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -396985175770574521, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: eatenSpeed
@@ -4451,7 +4455,7 @@ PrefabInstance:
       objectReference: {fileID: 2093081811}
     - target: {fileID: -396985175770574521, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: frightenedSpeed
-      value: 4
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 3944257720120653800, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4604,6 +4608,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 280798083}
     m_Modifications:
     - target: {fileID: -6234543618861352195, guid: 82b17f281df91594e82f2a47288c1db1, type: 3}
+      propertyPath: Speed
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -6234543618861352195, guid: 82b17f281df91594e82f2a47288c1db1, type: 3}
       propertyPath: wallsTilemap
       value: 
       objectReference: {fileID: 556835975}
@@ -4612,6 +4620,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1535103323}
     - target: {fileID: -753914558111122735, guid: 82b17f281df91594e82f2a47288c1db1, type: 3}
+      propertyPath: cooldown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -753914558111122735, guid: 82b17f281df91594e82f2a47288c1db1, type: 3}
+      propertyPath: baseSpeed
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -753914558111122735, guid: 82b17f281df91594e82f2a47288c1db1, type: 3}
+      propertyPath: showDebug
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -753914558111122735, guid: 82b17f281df91594e82f2a47288c1db1, type: 3}
+      propertyPath: eatenSpeed
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -753914558111122735, guid: 82b17f281df91594e82f2a47288c1db1, type: 3}
       propertyPath: eatenTarget
       value: 
       objectReference: {fileID: 555714724}
@@ -4619,6 +4643,10 @@ PrefabInstance:
       propertyPath: scatterTarget
       value: 
       objectReference: {fileID: 872201396}
+    - target: {fileID: -753914558111122735, guid: 82b17f281df91594e82f2a47288c1db1, type: 3}
+      propertyPath: frightenedSpeed
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3944257720120653800, guid: 82b17f281df91594e82f2a47288c1db1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -4665,7 +4693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4455264859461700174, guid: 82b17f281df91594e82f2a47288c1db1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10880,6 +10908,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 280798083}
     m_Modifications:
     - target: {fileID: -6234543618861352195, guid: e93a54ae9bd34a54094e6922a7c81dff, type: 3}
+      propertyPath: Speed
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -6234543618861352195, guid: e93a54ae9bd34a54094e6922a7c81dff, type: 3}
       propertyPath: wallsTilemap
       value: 
       objectReference: {fileID: 556835975}
@@ -10888,6 +10920,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1535103323}
     - target: {fileID: -1538855689702425724, guid: e93a54ae9bd34a54094e6922a7c81dff, type: 3}
+      propertyPath: cooldown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1538855689702425724, guid: e93a54ae9bd34a54094e6922a7c81dff, type: 3}
+      propertyPath: baseSpeed
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1538855689702425724, guid: e93a54ae9bd34a54094e6922a7c81dff, type: 3}
+      propertyPath: showDebug
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1538855689702425724, guid: e93a54ae9bd34a54094e6922a7c81dff, type: 3}
+      propertyPath: eatenSpeed
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1538855689702425724, guid: e93a54ae9bd34a54094e6922a7c81dff, type: 3}
       propertyPath: eatenTarget
       value: 
       objectReference: {fileID: 555714724}
@@ -10895,6 +10943,10 @@ PrefabInstance:
       propertyPath: scatterTarget
       value: 
       objectReference: {fileID: 1196066319}
+    - target: {fileID: -1538855689702425724, guid: e93a54ae9bd34a54094e6922a7c81dff, type: 3}
+      propertyPath: frightenedSpeed
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3944257720120653800, guid: e93a54ae9bd34a54094e6922a7c81dff, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -10941,7 +10993,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4455264859461700174, guid: e93a54ae9bd34a54094e6922a7c81dff, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14263,6 +14315,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 280798083}
     m_Modifications:
     - target: {fileID: -6234543618861352195, guid: 86063448513ef704cba96bc8f2a8b695, type: 3}
+      propertyPath: Speed
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -6234543618861352195, guid: 86063448513ef704cba96bc8f2a8b695, type: 3}
       propertyPath: wallsTilemap
       value: 
       objectReference: {fileID: 556835975}
@@ -14271,9 +14327,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1535103323}
     - target: {fileID: 1949045380791610914, guid: 86063448513ef704cba96bc8f2a8b695, type: 3}
+      propertyPath: cooldown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949045380791610914, guid: 86063448513ef704cba96bc8f2a8b695, type: 3}
       propertyPath: redGhost
       value: 
       objectReference: {fileID: 438310125}
+    - target: {fileID: 1949045380791610914, guid: 86063448513ef704cba96bc8f2a8b695, type: 3}
+      propertyPath: baseSpeed
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949045380791610914, guid: 86063448513ef704cba96bc8f2a8b695, type: 3}
+      propertyPath: showDebug
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1949045380791610914, guid: 86063448513ef704cba96bc8f2a8b695, type: 3}
+      propertyPath: eatenSpeed
+      value: 6.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1949045380791610914, guid: 86063448513ef704cba96bc8f2a8b695, type: 3}
       propertyPath: eatenTarget
       value: 
@@ -14282,6 +14354,10 @@ PrefabInstance:
       propertyPath: scatterTarget
       value: 
       objectReference: {fileID: 1038829842}
+    - target: {fileID: 1949045380791610914, guid: 86063448513ef704cba96bc8f2a8b695, type: 3}
+      propertyPath: frightenedSpeed
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3944257720120653800, guid: 86063448513ef704cba96bc8f2a8b695, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -14328,7 +14404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4455264859461700174, guid: 86063448513ef704cba96bc8f2a8b695, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
