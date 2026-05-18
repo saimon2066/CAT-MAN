@@ -34,6 +34,7 @@ public class BlueGhost : MonoBehaviour, IGhost
         switch (_state)
         {
             case GhostManager.GhostState.Chase: 
+                ai.Movement.Speed = baseSpeed;
                 _spriteRenderer.color = color;
                 if (player.Direction == new Vector2Int(0, 1))
                 {
@@ -48,11 +49,13 @@ public class BlueGhost : MonoBehaviour, IGhost
                 break;
 
             case GhostManager.GhostState.Scatter:
+                ai.Movement.Speed = baseSpeed;
                 _spriteRenderer.color = color;
                 dest = ai.Movement.wallsTilemap.WorldToCell(scatterTarget.position);
                 break;
 
             case GhostManager.GhostState.Frightened:
+                ai.Movement.Speed = frightenedSpeed;
                 _spriteRenderer.color = Color.blue;
                 dest = null;
                 break;
