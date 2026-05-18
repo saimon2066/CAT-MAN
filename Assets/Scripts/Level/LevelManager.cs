@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -31,6 +32,8 @@ public class LevelManager : MonoBehaviour
 
     private int _currentLevel;
 
+    private bool _corotRunning;
+    
     private WaitForSeconds _wait2sec = new(2f);
     private WaitForSeconds _wait2p5sec = new (2.5f);
 
@@ -63,12 +66,18 @@ public class LevelManager : MonoBehaviour
         LevelFailed?.Invoke();
         _currentLevel = 0;
     }
-
     private void SetMovementPaused(bool isPaused)
     {
         foreach (Movement m in movements)
         {
             m.IsPaused = isPaused;
+        }
+    }
+    public void SetGamePaused(bool isPaused)
+    {
+        if (!_corotRunning)
+        {
+            SetMovementPaused(isPaused);
         }
     }
     private void SpawnItems()
@@ -111,6 +120,7 @@ public class LevelManager : MonoBehaviour
     }
     private void OnPlayerDeath(int lives)
     {
+        StopAllCoroutines();
         if (lives == 0)
         {
             StartCoroutine(LevelFailCorot());
@@ -120,39 +130,51 @@ public class LevelManager : MonoBehaviour
             StartCoroutine(PlayerDeathCorot());
         }
     }
+    private void OnPlayerScoreChanged(int score)
+    {
+        if (SpawnedItems.Count == 0)
+        {
+            StopAllCoroutines();
+            StartCoroutine(NextLevelCorot());
+        }
+    }
 
     private IEnumerator NextLevelCorot()
     {
+        _corotRunning = true;
+
         SetMovementPaused(true);
         yield return _wait2p5sec;
         NextLevel();
         yield return _wait2sec;
         SetMovementPaused(false);
+
+        _corotRunning = false;
     }
     private IEnumerator PlayerDeathCorot()
     {
+        _corotRunning = true;
+
         SetMovementPaused(true);
         yield return _wait2p5sec;
         RespawnEveryone();
         yield return _wait2sec;
         SetMovementPaused(false);
         LevelChanged?.Invoke(_currentLevel);
-    }
 
-    private void OnPlayerScoreChanged(int score)
-    {
-        if (SpawnedItems.Count == 0)
-        {
-            StartCoroutine(NextLevelCorot());
-        }
+        _corotRunning = false;
     }
     private IEnumerator LevelFailCorot()
     {
+        _corotRunning = true;
+
         SetMovementPaused(true);
         yield return _wait2p5sec;
         LevelFail();
         yield return _wait2sec;
         SetMovementPaused(false);
         NextLevel();
+
+        _corotRunning = false;
     }
 }
