@@ -110,8 +110,6 @@ public class GhostManager : MonoBehaviour
     }
     private void SetGhostPaused(bool pause, GhostState ignoreState = GhostState.None)
     {
-        Debug.Log(pause);
-
         foreach (MonoBehaviour mono in ghosts)
         {
             if (mono.TryGetComponent(out IGhost ghost))

@@ -10878,7 +10878,6 @@ GameObject:
   - component: {fileID: 949740795}
   - component: {fileID: 949740799}
   - component: {fileID: 949740800}
-  - component: {fileID: 949740801}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -10989,19 +10988,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CustomCursor
   cursorImage: {fileID: 499270844}
   canvasRectTransform: {fileID: 949740798}
---- !u!114 &949740801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 949740794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98692b838d1bdba4aa8831e1bac0476e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GhostManagerUI
-  levelManager: {fileID: 1997426675237007849}
 --- !u!1001 &974313114
 PrefabInstance:
   m_ObjectHideFlags: 0
