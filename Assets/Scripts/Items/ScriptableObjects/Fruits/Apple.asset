@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1160c4bf26b95e4c8a475218639b02a, type: 3}
-  m_Name: Energizer
+  m_Name: Apple
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  DisplayName: Energizer
-  Score: 50
-  DoesEnergize: 1
-  Sprite: {fileID: 7114218576657300672, guid: 2da87f9b49ddb2749883adc84bee27c6, type: 3}
+  DisplayName: AppleOctopus
+  Score: 700
+  DoesEnergize: 0
+  Sprite: {fileID: 2823619171156859091, guid: 7774bdf0969254b498ae6736218369d7, type: 3}

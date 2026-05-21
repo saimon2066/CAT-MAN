@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -31,11 +30,14 @@ public class LevelManager : MonoBehaviour
     [HideInInspector] public List<Item> SpawnedItems = new();
 
     private int _currentLevel;
+    private int _levelEndScore;
 
-    private bool _corotRunning;
+    private int _fruitSpawned;
+    private Item _currentFruit;
     
     private WaitForSeconds _wait2sec = new(2f);
     private WaitForSeconds _wait2p5sec = new (2.5f);
+    private WaitForSeconds _wait9sec = new(9f);
 
     private void OnEnable()
     {
@@ -73,15 +75,17 @@ public class LevelManager : MonoBehaviour
             m.IsPaused = isPaused;
         }
     }
-    public void SetGamePaused(bool isPaused)
-    {
-        if (!_corotRunning)
-        {
-            SetMovementPaused(isPaused);
-        }
-    }
     private void SpawnItems()
     {
+        _currentFruit = null;
+        if (SpawnedItems.Count != 0)
+        {
+            foreach (Item item in SpawnedItems)
+            {
+                item.Pickup();
+            }
+        }
+
         foreach (Transform spawn in pelletSpawns)
         {
             GameObject obj = Instantiate(itemPrefab, spawn.position, Quaternion.identity, spawn);
@@ -99,7 +103,7 @@ public class LevelManager : MonoBehaviour
             GameObject obj = Instantiate(itemPrefab, spawn.position, Quaternion.identity, spawn);
             Item item = obj.GetComponent<Item>();
 
-            obj.name = pellet.DisplayName + $"_{spawn.position}";
+            obj.name = energizer.DisplayName + $"_{spawn.position}";
             item.Score = energizer.Score;
             item.spriteRenderer.sprite = energizer.Sprite;
             item.levelManager = this;
@@ -107,6 +111,25 @@ public class LevelManager : MonoBehaviour
 
             SpawnedItems.Add(item);
         }
+    }
+    private void SpawnFruit()
+    {
+        _fruitSpawned++;
+        
+        int i = Mathf.Clamp(_currentLevel - 1, 0, fruits.Length);
+
+        GameObject obj = Instantiate(itemPrefab, fruitSpawn.position, Quaternion.identity, fruitSpawn);
+        Item item = obj.GetComponent<Item>();
+
+        obj.name = fruits[i].DisplayName + $"_{fruitSpawn.position}";
+        item.Score = fruits[i].Score;
+        item.spriteRenderer.sprite = fruits[i].Sprite;
+        item.levelManager = this;
+        item.DoesEnergize = fruits[i].DoesEnergize;
+
+        SpawnedItems.Add(item);
+        _currentFruit = item;
+        StartCoroutine(FruitSpawnCorot(item));
     }
     private void RespawnEveryone()
     {
@@ -118,6 +141,7 @@ public class LevelManager : MonoBehaviour
             ghost.transform.position = ghostSpawn.position;
         }
     }
+
     private void OnPlayerDeath(int lives)
     {
         StopAllCoroutines();
@@ -132,49 +156,57 @@ public class LevelManager : MonoBehaviour
     }
     private void OnPlayerScoreChanged(int score)
     {
-        if (SpawnedItems.Count == 0)
+        if (SpawnedItems.Count == 0 || (_currentFruit  && SpawnedItems.Count == 1))
         {
+            _levelEndScore = score;
             StopAllCoroutines();
             StartCoroutine(NextLevelCorot());
+        }
+        else
+        {
+            if (!SpawnedItems.Contains(_currentFruit))
+            {
+                if (score >= _levelEndScore + 700 && _fruitSpawned < 1)
+                {
+                    SpawnFruit();
+                }
+                else if (score >= _levelEndScore + 2000 && _fruitSpawned < 2)
+                {
+                    SpawnFruit();
+                }
+            }
         }
     }
 
     private IEnumerator NextLevelCorot()
     {
-        _corotRunning = true;
-
         SetMovementPaused(true);
         yield return _wait2p5sec;
         NextLevel();
         yield return _wait2sec;
         SetMovementPaused(false);
-
-        _corotRunning = false;
     }
     private IEnumerator PlayerDeathCorot()
     {
-        _corotRunning = true;
-
         SetMovementPaused(true);
         yield return _wait2p5sec;
         RespawnEveryone();
         yield return _wait2sec;
         SetMovementPaused(false);
         LevelChanged?.Invoke(_currentLevel);
-
-        _corotRunning = false;
     }
     private IEnumerator LevelFailCorot()
     {
-        _corotRunning = true;
-
         SetMovementPaused(true);
         yield return _wait2p5sec;
         LevelFail();
         yield return _wait2sec;
         SetMovementPaused(false);
         NextLevel();
-
-        _corotRunning = false;
+    }
+    private IEnumerator FruitSpawnCorot(Item fruit)
+    {
+        yield return _wait9sec;
+        if (fruit) fruit.Pickup();
     }
 }
