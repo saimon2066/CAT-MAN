@@ -1,17 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-public class Phase
-{
-    public GhostManager.GhostState State;
-    public float Time;
-    public Phase(GhostManager.GhostState state, float time)
-    {
-        State = state;
-        Time = time;
-    }
-}
-
 public class GhostManager : MonoBehaviour
 {
     [Header("Settings")]
@@ -24,7 +13,7 @@ public class GhostManager : MonoBehaviour
 
     public enum GhostState
     {
-        Chase, Scatter, Frightened, Eaten, None
+        Chase, Scatter, Frightened, Eaten, Leaving, None
     }
 
     private readonly Phase[][] _phases =
@@ -144,6 +133,17 @@ public class GhostManager : MonoBehaviour
                 SetGhostStates(phase.State, false);
                 yield return new WaitForSeconds(phase.Time);
             }
+        }
+    }
+
+    private class Phase
+    {
+        public GhostState State;
+        public float Time;
+        public Phase(GhostState state, float time)
+        {
+            State = state;
+            Time = time;
         }
     }
 }

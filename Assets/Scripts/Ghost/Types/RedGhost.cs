@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class RedGhost : MonoBehaviour, IGhost
@@ -8,7 +7,7 @@ public class RedGhost : MonoBehaviour, IGhost
     [SerializeField] private bool showDebug;
     [SerializeField] private Transform scatterTarget;
     [SerializeField] private Transform eatenTarget;
-    [SerializeField] private float cooldown;
+    [SerializeField] private Transform leavingTarget;
     [SerializeField] private float baseSpeed, eatenSpeed, frightenedSpeed;
     [Header("References")]
     [SerializeField] private Movement player;
@@ -59,8 +58,21 @@ public class RedGhost : MonoBehaviour, IGhost
                     ai.DoorCell = new(0, 100, 0);
                     if (ai.Movement.CurrentTile == dest)
                     {
-                        StartCoroutine(RespawnCorot());                        
+                        _isRespawning = true;   
+                        SetState(GhostManager.GhostState.Leaving, true);              
                     }
+                }
+                break;
+
+            case GhostManager.GhostState.Leaving:
+                ai.Movement.Speed = baseSpeed;
+                _spriteRenderer.color = color;
+                dest = ai.Movement.wallsTilemap.WorldToCell(leavingTarget.position);
+                if (ai.Movement.CurrentTile == dest)
+                {
+                    ai.DoorCell = new(0, 1, 0);
+                    SetPaused(false);
+                    _isRespawning = false;
                 }
                 break;
 
@@ -87,15 +99,15 @@ public class RedGhost : MonoBehaviour, IGhost
         {
             if (isForced)
             {
-                ai.Movement.FlipDirection();
                 _state = state;
+                ai.Movement.FlipDirection();
             }   
             else
             {
                 if (!_statesPaused)
                 {
-                    ai.Movement.FlipDirection();
                     _state = state;
+                    ai.Movement.FlipDirection();
                 }  
                 else
                 {
@@ -126,18 +138,5 @@ public class RedGhost : MonoBehaviour, IGhost
     public GhostManager.GhostState ReturnState()
     {
         return _state;
-    }
-
-    private WaitForSeconds _wait1Sec = new(1);
-    private IEnumerator RespawnCorot()
-    {
-        _isRespawning = true;
-        ai.DoorCell = new(0, 1, 0);
-        yield return new WaitForSeconds(cooldown);
-        SetPaused(false);
-        ai.DoorCell = new(0, 100, 0);
-        yield return _wait1Sec;
-        ai.DoorCell = new(0, 1, 0);
-        _isRespawning = false;
     }
 }

@@ -11,7 +11,7 @@ public class Item : MonoBehaviour, IPickable
 
     public (int Score, bool DoesEnergize) Pickup()
     {
-        levelManager.SpawnedItems.Remove(this);
+        if (levelManager.SpawnedItems.Contains(this)) levelManager.SpawnedItems.Remove(this);
         Destroy(gameObject);
         return (Score, DoesEnergize);
     }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -34,6 +35,8 @@ public class LevelManager : MonoBehaviour
 
     private int _fruitSpawned;
     private Item _currentFruit;
+
+    private Coroutine _fruitCorot;
     
     private WaitForSeconds _wait2sec = new(2f);
     private WaitForSeconds _wait2p5sec = new (2.5f);
@@ -77,14 +80,14 @@ public class LevelManager : MonoBehaviour
     }
     private void SpawnItems()
     {
-        _currentFruit = null;
-        if (SpawnedItems.Count != 0)
+        if (SpawnedItems.Count > 0) for (int i = 0; i < SpawnedItems.Count; i++)
         {
-            foreach (Item item in SpawnedItems)
-            {
-                item.Pickup();
-            }
+            SpawnedItems[i].Pickup();
         }
+
+        if (_fruitCorot != null) StopCoroutine(_fruitCorot);
+        if (_currentFruit) _currentFruit.Pickup();
+        _currentFruit = null;
 
         foreach (Transform spawn in pelletSpawns)
         {
@@ -127,9 +130,8 @@ public class LevelManager : MonoBehaviour
         item.levelManager = this;
         item.DoesEnergize = fruits[i].DoesEnergize;
 
-        SpawnedItems.Add(item);
         _currentFruit = item;
-        StartCoroutine(FruitSpawnCorot(item));
+        _fruitCorot ??= StartCoroutine(FruitSpawnCorot(item));
     }
     private void RespawnEveryone()
     {
@@ -144,7 +146,6 @@ public class LevelManager : MonoBehaviour
 
     private void OnPlayerDeath(int lives)
     {
-        StopAllCoroutines();
         if (lives == 0)
         {
             StartCoroutine(LevelFailCorot());
@@ -156,10 +157,9 @@ public class LevelManager : MonoBehaviour
     }
     private void OnPlayerScoreChanged(int score)
     {
-        if (SpawnedItems.Count == 0 || (_currentFruit  && SpawnedItems.Count == 1))
+        if (SpawnedItems.Count == 0)
         {
             _levelEndScore = score;
-            StopAllCoroutines();
             StartCoroutine(NextLevelCorot());
         }
         else
