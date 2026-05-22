@@ -59,6 +59,7 @@ public class LevelManager : MonoBehaviour
 
     private void NextLevel()
     {
+        _fruitSpawned = 0;
         _currentLevel++;
 
         SpawnItems();
