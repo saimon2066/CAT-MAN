@@ -11,6 +11,7 @@ public class RedGhost : MonoBehaviour, IGhost
     [SerializeField] private float baseSpeed, eatenSpeed, frightenedSpeed;
     [Header("References")]
     [SerializeField] private Movement player;
+    [SerializeField] private PlayerManager playerManager;
     [SerializeField] private GhostAI ai;
 
     private SpriteRenderer _spriteRenderer;
@@ -68,12 +69,12 @@ public class RedGhost : MonoBehaviour, IGhost
                 ai.Movement.Speed = baseSpeed;
                 _spriteRenderer.color = color;
                 dest = ai.Movement.wallsTilemap.WorldToCell(leavingTarget.position);
-                if (ai.Movement.CurrentTile == dest)
+                if (ai.Movement.CurrentTile == dest && _isRespawning)
                 {
-                    ai.DoorCell = new(0, 1, 0);
-                    SetPaused(false);
                     _isRespawning = false;
+                    ai.DoorCell = new(0, 1, 0);
                 }
+                if (!playerManager.Energized) SetPaused(false);
                 break;
 
             case GhostManager.GhostState.None:
