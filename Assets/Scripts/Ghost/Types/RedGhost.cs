@@ -13,6 +13,7 @@ public class RedGhost : MonoBehaviour, IGhost
     [Header("References")]
     [SerializeField] private Movement player;
     [SerializeField] private GhostAI ai;
+    [SerializeField] private LevelManager levelManager;
 
     private SpriteRenderer _spriteRenderer;
 
@@ -21,6 +22,15 @@ public class RedGhost : MonoBehaviour, IGhost
 
     private bool _statesPaused;
     private bool _isRespawning;
+
+    private void OnEnable()
+    {
+        
+    }
+    private void OnDisable()
+    {
+        
+    }
 
     private void Awake()
     {
@@ -33,18 +43,21 @@ public class RedGhost : MonoBehaviour, IGhost
         switch (_state)
         {
             case GhostManager.GhostState.Chase: 
+                _isRespawning = false;
                 ai.Movement.Speed = baseSpeed;
                 _spriteRenderer.color = color;
                 dest = player.CurrentTile;
                 break;
 
             case GhostManager.GhostState.Scatter:
+                _isRespawning = false;
                 ai.Movement.Speed = baseSpeed;
                 _spriteRenderer.color = color;
                 dest = ai.Movement.wallsTilemap.WorldToCell(scatterTarget.position);
                 break;
 
             case GhostManager.GhostState.Frightened:
+                _isRespawning = false;
                 ai.Movement.Speed = frightenedSpeed;
                 _spriteRenderer.color = Color.blue;
                 dest = null;

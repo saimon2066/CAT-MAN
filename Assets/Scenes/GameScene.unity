@@ -4835,22 +4835,34 @@ PrefabInstance:
     - target: {fileID: 2961060590768709437, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -6643609120604141307, guid: 7e89ce22ffc51c34a818dae082037315, type: 3}
+      objectReference: {fileID: 5735070303816452028, guid: 3a75031afd33fe441bedafdfb2151ca6, type: 3}
+    - target: {fileID: 2995391421784893733, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995391421784893733, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995391421784893733, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3575479393585793646, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: m_SpriteTilingProperty.border.w
-      value: 0.21875
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3575479393585793646, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: m_SpriteTilingProperty.border.x
-      value: 0.21875
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3575479393585793646, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: m_SpriteTilingProperty.border.y
-      value: 0.21875
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3575479393585793646, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: m_SpriteTilingProperty.border.z
-      value: 0.21875
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3575479393585793646, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -4874,11 +4886,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3944257720120653800, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5
+      value: 0.497
       objectReference: {fileID: 0}
     - target: {fileID: 3944257720120653800, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.5
+      value: 2.494
       objectReference: {fileID: 0}
     - target: {fileID: 3944257720120653800, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: m_LocalPosition.z
