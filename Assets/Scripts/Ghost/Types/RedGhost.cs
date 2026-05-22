@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class RedGhost : MonoBehaviour, IGhost
@@ -11,7 +12,6 @@ public class RedGhost : MonoBehaviour, IGhost
     [SerializeField] private float baseSpeed, eatenSpeed, frightenedSpeed;
     [Header("References")]
     [SerializeField] private Movement player;
-    [SerializeField] private PlayerManager playerManager;
     [SerializeField] private GhostAI ai;
 
     private SpriteRenderer _spriteRenderer;
@@ -69,12 +69,12 @@ public class RedGhost : MonoBehaviour, IGhost
                 ai.Movement.Speed = baseSpeed;
                 _spriteRenderer.color = color;
                 dest = ai.Movement.wallsTilemap.WorldToCell(leavingTarget.position);
-                if (ai.Movement.CurrentTile == dest && _isRespawning)
+                if (ai.Movement.CurrentTile == dest)
                 {
-                    _isRespawning = false;
                     ai.DoorCell = new(0, 1, 0);
+                    SetPaused(false);
+                    _isRespawning = false;
                 }
-                if (!playerManager.Energized) SetPaused(false);
                 break;
 
             case GhostManager.GhostState.None:
@@ -94,9 +94,9 @@ public class RedGhost : MonoBehaviour, IGhost
         }
     }
 
-    public void SetState(GhostManager.GhostState state, bool isForced, GhostManager.GhostState ignoreState = GhostManager.GhostState.None)
+    public void SetState(GhostManager.GhostState state, bool isForced, GhostManager.GhostState[] ignoreStates = null)
     {
-        if (_state != ignoreState)
+        if (ignoreStates == null || !ignoreStates.Contains(_state))
         {
             if (isForced)
             {
@@ -115,11 +115,12 @@ public class RedGhost : MonoBehaviour, IGhost
                     _futureState = state;
                 }
             }
-        }
+        }   
     }
-    public void SetPaused(bool pause, GhostManager.GhostState ignoreState = GhostManager.GhostState.None)
+    public void SetPaused(bool pause, GhostManager.GhostState[] ignoreStates = null)
     {
-        if (_state != ignoreState)
+    
+        if (ignoreStates == null || !ignoreStates.Contains(_state))
         {
             _statesPaused = pause;
             if (!_statesPaused)

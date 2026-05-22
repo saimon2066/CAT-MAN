@@ -76,34 +76,35 @@ public class GhostManager : MonoBehaviour
     }
     private void OnPlayerEnergize(bool energize)
     {
+        GhostState[] ignoreStates = {GhostState.Eaten, GhostState.Leaving};
         if (energize)
         {
-            SetGhostStates(GhostState.Frightened, false, GhostState.Eaten);
+            SetGhostStates(GhostState.Frightened, false, ignoreStates);
             SetGhostPaused(true);
         }
         else
         {
-            SetGhostPaused(false, GhostState.Eaten);
+            SetGhostPaused(false, ignoreStates);
         }
     }
 
-    private void SetGhostStates(GhostState state, bool isForced, GhostState ignoreState = GhostState.None)
+    private void SetGhostStates(GhostState state, bool isForced, GhostState[] ignoreStates = null)
     {
         foreach (MonoBehaviour mono in ghosts)
         {
             if (mono.TryGetComponent(out IGhost ghost))
             {
-                ghost.SetState(state, isForced, ignoreState);
+                ghost.SetState(state, isForced, ignoreStates);
             }
         }
     }
-    private void SetGhostPaused(bool pause, GhostState ignoreState = GhostState.None)
+    private void SetGhostPaused(bool pause, GhostState[] ignoreStates = null)
     {
         foreach (MonoBehaviour mono in ghosts)
         {
             if (mono.TryGetComponent(out IGhost ghost))
             {
-                ghost.SetPaused(pause, ignoreState);
+                ghost.SetPaused(pause, ignoreStates);
             }
         }
     }
