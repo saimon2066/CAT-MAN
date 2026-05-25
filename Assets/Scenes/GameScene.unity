@@ -4894,11 +4894,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3944257720120653800, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.497
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3944257720120653800, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.494
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3944257720120653800, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4944,6 +4944,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4455264859461700174, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 438310137}
     - targetCorrespondingSourceObject: {fileID: 4455264859461700174, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 438310136}
@@ -4997,6 +5000,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &438310137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385722950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e92e05dfceb10cd4a9771891ccafc1d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GhostAnimationManager
+  movement: {fileID: 438310125}
+  animator: {fileID: 438310136}
 --- !u!1001 &454913187
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14947,8 +14964,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimationManager
   movement: {fileID: 1535103323}
   animator: {fileID: 1535103329}
-  playerManager: {fileID: 6239803316708725566}
   levelManager: {fileID: 1997426675237007849}
+  playerManager: {fileID: 6239803316708725566}
 --- !u!1 &1563124211
 GameObject:
   m_ObjectHideFlags: 0
