@@ -4,7 +4,7 @@ using UnityEngine;
 public class GhostManager : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private MonoBehaviour[] ghosts;
+    [SerializeField] private GameObject[] ghosts;
     [Header("References")]
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private PlayerManager playerManager;
@@ -90,9 +90,9 @@ public class GhostManager : MonoBehaviour
 
     private void SetGhostStates(GhostState state, bool isForced, GhostState[] ignoreStates = null)
     {
-        foreach (MonoBehaviour mono in ghosts)
+        foreach (GameObject obj in ghosts)
         {
-            if (mono.TryGetComponent(out IGhost ghost))
+            if (obj.TryGetComponent(out GhostBase ghost))
             {
                 ghost.SetState(state, isForced, ignoreStates);
             }
@@ -100,9 +100,9 @@ public class GhostManager : MonoBehaviour
     }
     private void SetGhostPaused(bool pause, GhostState[] ignoreStates = null)
     {
-        foreach (MonoBehaviour mono in ghosts)
+        foreach (GameObject obj in ghosts)
         {
-            if (mono.TryGetComponent(out IGhost ghost))
+            if (obj.TryGetComponent(out GhostBase ghost))
             {
                 ghost.SetPaused(pause, ignoreStates);
             }

@@ -81,8 +81,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 6
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 5963570024058409018, guid: c42029f4f5ea69a40af20c5af08ed06d, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: -6520859744263135556, guid: b1a26358e6bedc3428b1a6db309757b8, type: 3}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -102,12 +102,13 @@ GameObject:
   - component: {fileID: 3944257720120653800}
   - component: {fileID: -6153361955887311822}
   - component: {fileID: -6234543618861352195}
-  - component: {fileID: -396985175770574521}
+  - component: {fileID: 6130165550382544215}
   - component: {fileID: 3575479393585793646}
   - component: {fileID: 4112123235962968007}
   - component: {fileID: 2961060590768709437}
+  - component: {fileID: 6123361436772066441}
   m_Layer: 7
-  m_Name: Red
+  m_Name: GhostTemplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -155,13 +156,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927e7c52073ae6e4e9474daa258d3656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
-  Speed: 0
+  Speed: 4.5
   wallsTilemap: {fileID: 0}
   Rb2D: {fileID: 4112123235962968007}
   IsPaused: 0
   CurrentTile: {x: 0, y: 0, z: 0}
   CloseToCenter: 0
---- !u!114 &-396985175770574521
+--- !u!114 &6130165550382544215
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,20 +171,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4455264859461700174}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 469368cb2c08b37468ebd077a10080e7, type: 3}
+  m_Script: {fileID: 11500000, guid: e92e05dfceb10cd4a9771891ccafc1d1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RedGhost
-  color: {r: 1, g: 0.039215688, b: 0, a: 1}
-  showDebug: 1
-  scatterTarget: {fileID: 0}
-  eatenTarget: {fileID: 0}
-  leavingTarget: {fileID: 0}
-  baseSpeed: 0
-  eatenSpeed: 0
-  frightenedSpeed: 0
-  player: {fileID: 0}
-  ai: {fileID: -6153361955887311822}
-  levelManager: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::GhostAnimationManager
+  movement: {fileID: -6234543618861352195}
+  animator: {fileID: 6123361436772066441}
 --- !u!61 &3575479393585793646
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -222,7 +214,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.4375, y: 0.84375}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.14, y: 0.27}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -306,7 +298,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 7
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 5735070303816452028, guid: 3a75031afd33fe441bedafdfb2151ca6, type: 3}
+  m_Sprite: {fileID: -7368208082360976902, guid: fa73c96f12ce7fc49a67ca5e749ce6e6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -316,3 +308,25 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!95 &6123361436772066441
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455264859461700174}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5abea61c9597fda4282cbae44715b678, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

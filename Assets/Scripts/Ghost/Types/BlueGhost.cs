@@ -1,160 +1,86 @@
-// using System.Collections;
-// using System.Linq;
-// using UnityEngine;
+using UnityEngine;
 
-// public class BlueGhost : MonoBehaviour, IGhost
-// {
-//     [Header("Settings")]
-//     [SerializeField] private Color color;
-//     [SerializeField] private bool showDebug;
-//     [SerializeField] private Transform scatterTarget;
-//     [SerializeField] private Transform eatenTarget;
-//     [SerializeField] private float cooldown;
-//     [SerializeField] private float baseSpeed, eatenSpeed, frightenedSpeed;
-//     [Header("References")]
-//     [SerializeField] private Movement player;
-//     [SerializeField] private Movement redGhost;
-//     [SerializeField] private GhostAI ai;
+public class BlueGhost : GhostBase
+{
+    [SerializeField] private Movement player;
+    [SerializeField] private Movement redGhost;
 
-//     private SpriteRenderer _spriteRenderer;
+    private void Update()
+    {
+        Vector3Int? dest = null;
+        switch (_state)
+        {
+            case GhostManager.GhostState.Chase: 
+                _isRespawning = false;
+                ai.Movement.Speed = baseSpeed;
+                collarRenderer.color = color;
+                if (player.Direction == new Vector2Int(0, 1))
+                {
+                    Vector3Int point = player.CurrentTile + new Vector3Int(-1, 1, 0);
+                    dest = point - (redGhost.CurrentTile - point);
+                }
+                else
+                {
+                    Vector3Int point = player.CurrentTile + (Vector3Int)player.Direction;
+                    dest = point - (redGhost.CurrentTile - point);
+                }
+                break;
 
-//     private GhostManager.GhostState _state;
-//     private GhostManager.GhostState _futureState;
+            case GhostManager.GhostState.Scatter:
+                _isRespawning = false;
+                ai.Movement.Speed = baseSpeed;
+                collarRenderer.color = color;
+                dest = ai.Movement.wallsTilemap.WorldToCell(scatterTarget.position);
+                break;
 
-//     private bool _statesPaused;
-//     private bool _isRespawning;
+            case GhostManager.GhostState.Frightened:
+                _isRespawning = false;
+                ai.Movement.Speed = frightenedSpeed;
+                collarRenderer.color = Color.blue;
+                dest = null;
+                break;
 
-//     private void Awake()
-//     {
-//         _spriteRenderer = GetComponent<SpriteRenderer>();   
-//         _spriteRenderer.color = color;      
-//     }
-//     private void Update()
-//     {
-//         Vector3Int? dest = null;
-//         switch (_state)
-//         {
-//             case GhostManager.GhostState.Chase: 
-//                 ai.Movement.Speed = baseSpeed;
-//                 _spriteRenderer.color = color;
-//                 if (player.Direction == new Vector2Int(0, 1))
-//                 {
-//                     Vector3Int point = player.CurrentTile + new Vector3Int(-1, 1, 0);
-//                     dest = point - (redGhost.CurrentTile - point);
-//                 }
-//                 else
-//                 {
-//                     Vector3Int point = player.CurrentTile + (Vector3Int)player.Direction;
-//                     dest = point - (redGhost.CurrentTile - point);
-//                 }
-//                 break;
+            case GhostManager.GhostState.Eaten:
+                ai.Movement.Speed = eatenSpeed;
+                collarRenderer.color = Color.white;
+                dest = ai.Movement.wallsTilemap.WorldToCell(eatenTarget.position);
+                if (!_isRespawning)
+                {
+                    ai.DoorCell = new(0, 100, 0);
+                    if (ai.Movement.CurrentTile == dest)
+                    {
+                        _isRespawning = true;   
+                        SetState(GhostManager.GhostState.Leaving, true);              
+                    }
+                }
+                break;
 
-//             case GhostManager.GhostState.Scatter:
-//                 ai.Movement.Speed = baseSpeed;
-//                 _spriteRenderer.color = color;
-//                 dest = ai.Movement.wallsTilemap.WorldToCell(scatterTarget.position);
-//                 break;
+            case GhostManager.GhostState.Leaving:
+                ai.Movement.Speed = baseSpeed;
+                collarRenderer.color = Color.white;
+                dest = ai.Movement.wallsTilemap.WorldToCell(leavingTarget.position);
+                if (ai.Movement.CurrentTile == dest)
+                {
+                    ai.DoorCell = new(0, 1, 0);
+                    SetPaused(false);
+                    _isRespawning = false;
+                }
+                break;
 
-//             case GhostManager.GhostState.Frightened:
-//                 ai.Movement.Speed = frightenedSpeed;
-//                 _spriteRenderer.color = Color.blue;
-//                 dest = null;
-//                 break;
+            case GhostManager.GhostState.None:
+                return;
+        }
 
-//             case GhostManager.GhostState.Eaten:
-//                 ai.Movement.Speed = eatenSpeed;
-//                 _spriteRenderer.color = Color.white;
-//                 dest = ai.Movement.wallsTilemap.WorldToCell(eatenTarget.position);
-//                 if (!_isRespawning)
-//                 {
-//                     ai.DoorCell = new(0, 100, 0);
-//                     if (ai.Movement.CurrentTile == dest)
-//                     {
-//                         StartCoroutine(RespawnCorot());                        
-//                     }
-//                 }
-//                 break;
+        ai.SetRandomization(_state == GhostManager.GhostState.Frightened);
 
-//             case GhostManager.GhostState.None:
-//                 return;
-//         }
+        if (dest != null)
+        {
+            ai.SetDestination((Vector3Int)dest);
 
-//         ai.SetRandomization(_state == GhostManager.GhostState.Frightened);
-
-//         if (dest != null)
-//         {
-//             ai.SetDestination((Vector3Int)dest);
-
-//             if (showDebug)
-//             {
-//                 Debug.DrawLine(ai.Movement.CurrentTile, (Vector3Int)dest, color, Time.deltaTime);                
-//             }
-//         }
-//     }
-
-//     public void SetState(GhostManager.GhostState state, bool isForced, GhostManager.GhostState[] ignoreStates = null)
-//     {
-//         if (ignoreStates != null)
-//         {
-//             if (!ignoreStates.Contains(_state))
-//             {
-//                 if (isForced)
-//                 {
-//                     _state = state;
-//                     ai.Movement.FlipDirection();
-//                 }   
-//                 else
-//                 {
-//                     if (!_statesPaused)
-//                     {
-//                         _state = state;
-//                         ai.Movement.FlipDirection();
-//                     }  
-//                     else
-//                     {
-//                         _futureState = state;
-//                     }
-//                 }
-//             }   
-//         }
-//     }
-//     public void SetPaused(bool pause, GhostManager.GhostState[] ignoreStates = null)
-//     {
-//         if (ignoreStates != null)
-//         {
-//             if (!ignoreStates.Contains(_state))
-//             {
-//                 _statesPaused = pause;
-//                 if (!_statesPaused)
-//                 {
-//                     SetState(_futureState, false);
-//                 }   
-//             }
-//         }
-//     }
-//     public void Die()
-//     {
-//         if (_state == GhostManager.GhostState.Frightened)
-//         {
-//             SetState(GhostManager.GhostState.Eaten, true);
-//             SetPaused(true);
-//         }
-//     }
-//     public GhostManager.GhostState ReturnState()
-//     {
-//         return _state;
-//     }
-
-//     private WaitForSeconds _wait1Sec = new(1);
-//     private IEnumerator RespawnCorot()
-//     {
-//         _isRespawning = true;
-//         ai.DoorCell = new(0, 1, 0);
-//         yield return new WaitForSeconds(cooldown);
-//         SetPaused(false);
-//         ai.DoorCell = new(0, 100, 0);
-//         yield return _wait1Sec;
-//         ai.DoorCell = new(0, 1, 0);
-//         _isRespawning = false;
-//     }
-// }
+            if (showDebug)
+            {
+                Debug.DrawLine(ai.Movement.CurrentTile, (Vector3Int)dest, color, Time.deltaTime);                
+            }
+        }
+    }
+}
