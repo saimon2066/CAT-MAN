@@ -21,7 +21,6 @@ public class PlayerManager : MonoBehaviour
     }
     public void Energize()
     {
-        Energized = true;
         if (_energizeCorot != null)
         {
             StopCoroutine(_energizeCorot);
@@ -47,6 +46,7 @@ public class PlayerManager : MonoBehaviour
     private WaitForSeconds _wait6Sec = new(6);
     private IEnumerator EnergizeCorot()
     {
+        Energized = true;
         PlayerEnergize?.Invoke(Energized);
         yield return _wait6Sec;
         Energized = false;

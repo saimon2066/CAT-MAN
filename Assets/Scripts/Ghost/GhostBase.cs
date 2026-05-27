@@ -23,6 +23,15 @@ public class GhostBase : MonoBehaviour, IGhost
     protected bool _statesPaused;
     protected bool _isRespawning;
 
+    private void OnEnable()
+    {
+        levelManager.LevelRespawnEveryone += OnLevelRespawnEveyone;
+    }
+    private void OnDisable()
+    {
+        levelManager.LevelRespawnEveryone -= OnLevelRespawnEveyone;
+    }
+
     public virtual void Start()
     { 
         collarRenderer.color = collarColor;   
@@ -73,5 +82,12 @@ public class GhostBase : MonoBehaviour, IGhost
     public GhostManager.GhostState ReturnState()
     {
         return _state;
+    }
+
+    private void OnLevelRespawnEveyone()
+    {
+        _statesPaused = false;
+        ai.Movement.Direction = Vector2Int.up;
+        ai.Movement.SetDirection(Vector2Int.up);
     }
 }
