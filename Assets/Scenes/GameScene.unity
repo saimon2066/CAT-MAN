@@ -3273,6 +3273,18 @@ PrefabInstance:
       propertyPath: wallsTilemap
       value: 
       objectReference: {fileID: 556835975}
+    - target: {fileID: -6153361955887311822, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      propertyPath: levelManager
+      value: 
+      objectReference: {fileID: 1997426675237007849}
+    - target: {fileID: 2961060590768709437, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995391421784893733, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3944257720120653800, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -3321,6 +3333,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5091908310370739328, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3352,15 +3368,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RedGhost
   color: {r: 1, g: 0, b: 0, a: 1}
+  collarColor: {r: 0.8018868, g: 0, b: 0, a: 1}
   scatterTarget: {fileID: 2093081811}
   eatenTarget: {fileID: 555714724}
   leavingTarget: {fileID: 673041455}
   baseSpeed: 4.5
   eatenSpeed: 5
   frightenedSpeed: 4
-  showDebug: 0
+  showDebug: 1
   ai: {fileID: 245500406}
+  levelManager: {fileID: 1997426675237007849}
   collarRenderer: {fileID: 245500407}
+  outlineRenderer: {fileID: 870803887}
   player: {fileID: 1535103323}
 --- !u!114 &245500406 stripped
 MonoBehaviour:
@@ -9490,6 +9509,18 @@ PrefabInstance:
       propertyPath: wallsTilemap
       value: 
       objectReference: {fileID: 556835975}
+    - target: {fileID: -6153361955887311822, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      propertyPath: levelManager
+      value: 
+      objectReference: {fileID: 1997426675237007849}
+    - target: {fileID: 2961060590768709437, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995391421784893733, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3944257720120653800, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -9536,7 +9567,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4455264859461700174, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5091908310370739328, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9584,7 +9619,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62a692b7c9862a74db202df8fd30fdbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlueGhost
-  color: {r: 0.23353481, g: 0, b: 1, a: 1}
+  color: {r: 0, g: 0.83998394, b: 1, a: 1}
+  collarColor: {r: 0, g: 0.6745098, b: 0.8, a: 0}
   scatterTarget: {fileID: 1038829842}
   eatenTarget: {fileID: 555714724}
   leavingTarget: {fileID: 673041455}
@@ -9593,7 +9629,9 @@ MonoBehaviour:
   frightenedSpeed: 4
   showDebug: 0
   ai: {fileID: 706471767}
+  levelManager: {fileID: 1997426675237007849}
   collarRenderer: {fileID: 706471765}
+  outlineRenderer: {fileID: 1006914771}
   player: {fileID: 1535103323}
   redGhost: {fileID: 869168223}
 --- !u!114 &706471774 stripped
@@ -10440,6 +10478,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927e7c52073ae6e4e9474daa258d3656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
+--- !u!212 &870803887 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5091908310370739328, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+  m_PrefabInstance: {fileID: 245500402}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &872201395
 GameObject:
   m_ObjectHideFlags: 0
@@ -11343,6 +11386,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6552357896997102578, guid: ee83feae3c6222b4a8bb10b89722a8e2, type: 3}
   m_PrefabInstance: {fileID: 1002407752}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1006914771 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5091908310370739328, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+  m_PrefabInstance: {fileID: 706471763}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1010002377
 PrefabInstance:
@@ -12388,6 +12436,18 @@ PrefabInstance:
       propertyPath: wallsTilemap
       value: 
       objectReference: {fileID: 556835975}
+    - target: {fileID: -6153361955887311822, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      propertyPath: levelManager
+      value: 
+      objectReference: {fileID: 1997426675237007849}
+    - target: {fileID: 2961060590768709437, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2995391421784893733, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3944257720120653800, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -12434,7 +12494,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4455264859461700174, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5091908310370739328, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12493,7 +12557,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5acddca0efb734e82fa01526b39a5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PinkGhost
-  color: {r: 1, g: 0, b: 0.6459122, a: 1}
+  color: {r: 1, g: 0, b: 0.7525463, a: 1}
+  collarColor: {r: 0.8, g: 0, b: 0.6023529, a: 1}
   scatterTarget: {fileID: 872201396}
   eatenTarget: {fileID: 555714724}
   leavingTarget: {fileID: 673041455}
@@ -12502,7 +12567,9 @@ MonoBehaviour:
   frightenedSpeed: 4
   showDebug: 0
   ai: {fileID: 1115658931}
+  levelManager: {fileID: 1997426675237007849}
   collarRenderer: {fileID: 1115658929}
+  outlineRenderer: {fileID: 1315778487}
   player: {fileID: 1535103323}
 --- !u!1001 &1148271249
 PrefabInstance:
@@ -13464,6 +13531,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6552357896997102578, guid: ee83feae3c6222b4a8bb10b89722a8e2, type: 3}
   m_PrefabInstance: {fileID: 1308715054}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1315778487 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5091908310370739328, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+  m_PrefabInstance: {fileID: 1115658927}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1318494430
 PrefabInstance:
@@ -17299,6 +17371,10 @@ PrefabInstance:
       propertyPath: wallsTilemap
       value: 
       objectReference: {fileID: 556835975}
+    - target: {fileID: -6153361955887311822, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+      propertyPath: levelManager
+      value: 
+      objectReference: {fileID: 1997426675237007849}
     - target: {fileID: 3944257720120653800, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -17345,7 +17421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4455264859461700174, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17394,6 +17470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OrangeGhost
   color: {r: 1, g: 0.5874088, b: 0, a: 1}
+  collarColor: {r: 0.8, g: 0.47058827, b: 0, a: 1}
   scatterTarget: {fileID: 1196066319}
   eatenTarget: {fileID: 555714724}
   leavingTarget: {fileID: 673041455}
@@ -17402,7 +17479,9 @@ MonoBehaviour:
   frightenedSpeed: 4
   showDebug: 0
   ai: {fileID: 1931492504}
+  levelManager: {fileID: 1997426675237007849}
   collarRenderer: {fileID: 1931492502}
+  outlineRenderer: {fileID: 1996300506}
   player: {fileID: 1535103323}
 --- !u!114 &1931492512 stripped
 MonoBehaviour:
@@ -22035,6 +22114,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6552357896997102578, guid: ee83feae3c6222b4a8bb10b89722a8e2, type: 3}
   m_PrefabInstance: {fileID: 1992185623}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1996300506 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5091908310370739328, guid: f10cef811d042d74d9e7efcfdc15051f, type: 3}
+  m_PrefabInstance: {fileID: 1931492500}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1997994737
 PrefabInstance:

@@ -10,9 +10,10 @@ public class PinkGhost : GhostBase
         switch (_state)
         {
             case GhostManager.GhostState.Chase: 
+                ai.DoorCell = new(0, 1, 0);
                 _isRespawning = false;
                 ai.Movement.Speed = baseSpeed;
-                collarRenderer.color = color;
+                outlineRenderer.color = color;
                 if (player.Direction == new Vector2Int(0, 1))
                 {
                     dest = player.CurrentTile + new Vector3Int(-2, 2, 0);
@@ -24,22 +25,24 @@ public class PinkGhost : GhostBase
                 break;
 
             case GhostManager.GhostState.Scatter:
+                ai.DoorCell = new(0, 1, 0);
                 _isRespawning = false;
                 ai.Movement.Speed = baseSpeed;
-                collarRenderer.color = color;
+                outlineRenderer.color = color;
                 dest = ai.Movement.wallsTilemap.WorldToCell(scatterTarget.position);
                 break;
 
             case GhostManager.GhostState.Frightened:
+                ai.DoorCell = new(0, 1, 0);
                 _isRespawning = false;
                 ai.Movement.Speed = frightenedSpeed;
-                collarRenderer.color = Color.blue;
+                outlineRenderer.color = Color.blue;
                 dest = null;
                 break;
 
             case GhostManager.GhostState.Eaten:
                 ai.Movement.Speed = eatenSpeed;
-                collarRenderer.color = Color.white;
+                outlineRenderer.color = Color.white;
                 dest = ai.Movement.wallsTilemap.WorldToCell(eatenTarget.position);
                 if (!_isRespawning)
                 {
@@ -54,7 +57,7 @@ public class PinkGhost : GhostBase
 
             case GhostManager.GhostState.Leaving:
                 ai.Movement.Speed = baseSpeed;
-                collarRenderer.color = Color.white;
+                outlineRenderer.color = Color.white;
                 dest = ai.Movement.wallsTilemap.WorldToCell(leavingTarget.position);
                 if (ai.Movement.CurrentTile == dest)
                 {

@@ -1,10 +1,12 @@
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GhostBase : MonoBehaviour, IGhost
 {
     [Header("Settings")]
     [SerializeField] protected Color color;
+    [SerializeField] private Color collarColor;
     [SerializeField] protected Transform scatterTarget;
     [SerializeField] protected Transform eatenTarget;
     [SerializeField] protected Transform leavingTarget;
@@ -12,7 +14,9 @@ public class GhostBase : MonoBehaviour, IGhost
     [SerializeField] protected bool showDebug;
     [Header("References")]
     [SerializeField] protected GhostAI ai;
+    [SerializeField] private LevelManager levelManager;
     [SerializeField] protected SpriteRenderer collarRenderer;
+    [SerializeField] protected SpriteRenderer outlineRenderer;
 
     protected GhostManager.GhostState _state;
     protected GhostManager.GhostState _futureState;
@@ -21,7 +25,7 @@ public class GhostBase : MonoBehaviour, IGhost
 
     public virtual void Start()
     { 
-        collarRenderer.color = color;   
+        collarRenderer.color = collarColor;   
     }
 
     public void SetState(GhostManager.GhostState state, bool isForced, GhostManager.GhostState[] ignoreStates = null)
@@ -30,15 +34,15 @@ public class GhostBase : MonoBehaviour, IGhost
         {
             if (isForced)
             {
+                if (_state != GhostManager.GhostState.Leaving) ai.Movement.FlipDirection();
                 _state = state;
-                ai.Movement.FlipDirection();
             }   
             else
             {
                 if (!_statesPaused)
                 {
+                    if (_state != GhostManager.GhostState.Leaving) ai.Movement.FlipDirection();
                     _state = state;
-                    ai.Movement.FlipDirection();
                 }  
                 else
                 {

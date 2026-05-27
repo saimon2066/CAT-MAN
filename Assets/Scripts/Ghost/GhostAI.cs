@@ -16,6 +16,15 @@ public class GhostAI : MonoBehaviour
 
     private bool _randomize;
 
+    private void OnDisable()
+    {
+        Movement.MovementDirectionFlipped -= OnMovementDirectionFlipped;
+    }
+    private void OnEnable()
+    {
+        Movement.MovementDirectionFlipped += OnMovementDirectionFlipped;
+    }
+
     private void Update()
     {
         if (Movement.CloseToCenter && Movement.CurrentTile != _lastTile)
@@ -112,5 +121,9 @@ public class GhostAI : MonoBehaviour
     public void SetRandomization(bool randomize)
     {
         _randomize = randomize;
+    }
+    public void OnMovementDirectionFlipped()
+    {
+        _lastTile = Movement.CurrentTile;
     }
 }

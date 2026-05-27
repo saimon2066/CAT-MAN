@@ -41,6 +41,7 @@ public class Movement : MonoBehaviour
 
     [HideInInspector] public bool CloseToCenter;
     public event Action<Vector2Int> MovementDirectionChanged;
+    public event Action MovementDirectionFlipped;
 
     private void Update()
     {
@@ -75,11 +76,13 @@ public class Movement : MonoBehaviour
     }
 
     public void SetDirection(Vector2Int dir)
-    {
+    {   
         _inputDirection = dir;
     }
     public void FlipDirection()
     {
-        Direction = -Direction;   
+        _inputDirection = -_direction;
+        Direction = -_direction; 
+        MovementDirectionFlipped?.Invoke();
     }
 }
