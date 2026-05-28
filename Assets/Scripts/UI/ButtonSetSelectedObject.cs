@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class ButtonSetSelectedObject : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class ButtonSetSelectedObject : MonoBehaviour
     
     public void SetSelected(GameObject select)
     {
-        eventSystem.SetSelectedGameObject(select);
+        if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
+            eventSystem.SetSelectedGameObject(select);
     }
 }
