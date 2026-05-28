@@ -3375,7 +3375,7 @@ MonoBehaviour:
   baseSpeed: 4.5
   eatenSpeed: 5
   frightenedSpeed: 4
-  showDebug: 1
+  showDebug: 0
   ai: {fileID: 245500406}
   levelManager: {fileID: 1997426675237007849}
   collarRenderer: {fileID: 245500407}
@@ -23574,6 +23574,7 @@ MonoBehaviour:
   Lives: 3
   Score: 0
   Energized: 0
+  GhostScoreMultiplier: 1
 --- !u!1 &6378561893879326938
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GhostManager : MonoBehaviour
@@ -76,15 +77,16 @@ public class GhostManager : MonoBehaviour
     }
     private void OnPlayerEnergize(bool energize)
     {
-        GhostState[] ignoreStates = {GhostState.Eaten, GhostState.Leaving};
+        List<GhostState> ignoreStates = new() {GhostState.Eaten, GhostState.Leaving, GhostState.Frightened};
         if (energize)
         {
-            SetGhostStates(GhostState.Frightened, false, ignoreStates);
+            SetGhostStates(GhostState.Frightened, false, ignoreStates.ToArray());
             SetGhostPaused(true);
         }
         else
         {
-            SetGhostPaused(false, ignoreStates);
+            ignoreStates.Remove(GhostState.Frightened);
+            SetGhostPaused(false, ignoreStates.ToArray());
         }
     }
 

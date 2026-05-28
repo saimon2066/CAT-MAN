@@ -8,6 +8,8 @@ public class PlayerManager : MonoBehaviour
     public int Score;
     public bool Energized;
 
+    public int GhostScoreMultiplier = 1;
+
     public event Action<int> PlayerScoreChanged;
     public event Action<int> PlayerDeath;
     public event Action<bool> PlayerEnergize;
@@ -21,6 +23,7 @@ public class PlayerManager : MonoBehaviour
     }
     public void Energize()
     {
+        GhostScoreMultiplier = 1;
         if (_energizeCorot != null)
         {
             StopCoroutine(_energizeCorot);

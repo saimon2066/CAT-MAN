@@ -11,7 +11,7 @@ public class BlueGhost : GhostBase
         switch (_state)
         {
             case GhostManager.GhostState.Chase: 
-                ai.DoorCell = new(0, 1, 0);
+                ai.Movement.blacklistedCell = new(0, 1, 0);
                 _isRespawning = false;
                 ai.Movement.Speed = baseSpeed;
                 outlineRenderer.color = color;
@@ -28,7 +28,7 @@ public class BlueGhost : GhostBase
                 break;
 
             case GhostManager.GhostState.Scatter:
-                ai.DoorCell = new(0, 1, 0);
+                ai.Movement.blacklistedCell = new(0, 1, 0);
                 _isRespawning = false;
                 ai.Movement.Speed = baseSpeed;
                 outlineRenderer.color = color;
@@ -36,7 +36,7 @@ public class BlueGhost : GhostBase
                 break;
 
             case GhostManager.GhostState.Frightened:
-                ai.DoorCell = new(0, 1, 0);
+                ai.Movement.blacklistedCell = new(0, 1, 0);
                 _isRespawning = false;
                 ai.Movement.Speed = frightenedSpeed;
                 outlineRenderer.color = Color.blue;
@@ -49,7 +49,7 @@ public class BlueGhost : GhostBase
                 dest = ai.Movement.wallsTilemap.WorldToCell(eatenTarget.position);
                 if (!_isRespawning)
                 {
-                    ai.DoorCell = new(0, 100, 0);
+                    ai.Movement.blacklistedCell = new(0, 100, 0);
                     if (ai.Movement.CurrentTile == dest)
                     {
                         _isRespawning = true;   
@@ -59,12 +59,13 @@ public class BlueGhost : GhostBase
                 break;
 
             case GhostManager.GhostState.Leaving:
+                ai.Movement.blacklistedCell = new(0, 100, 0);
                 ai.Movement.Speed = baseSpeed;
                 outlineRenderer.color = Color.white;
                 dest = ai.Movement.wallsTilemap.WorldToCell(leavingTarget.position);
                 if (ai.Movement.CurrentTile == dest)
                 {
-                    ai.DoorCell = new(0, 1, 0);
+                    ai.Movement.blacklistedCell = new(0, 1, 0);
                     SetPaused(false);
                     _isRespawning = false;
                 }

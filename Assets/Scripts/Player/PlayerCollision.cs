@@ -26,7 +26,10 @@ public class PlayerCollision : MonoBehaviour
             {
                 if (ghost.ReturnState() == GhostManager.GhostState.Frightened)
                 {
-                    if (playerManager.Energized) ghost.Die();
+                    ghost.Die();
+                    Debug.Log(200 * playerManager.GhostScoreMultiplier);
+                    playerManager.AddScore(200 * playerManager.GhostScoreMultiplier);
+                    playerManager.GhostScoreMultiplier *= 2;
                 }
                 else
                 {

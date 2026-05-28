@@ -7,14 +7,13 @@ public class GhostAI : MonoBehaviour
     [Header("References")]
     public Movement Movement;
 
-    [HideInInspector] public Vector3Int DoorCell = new(0, 1, 0);
-
     private Vector3Int _destination;
     private Vector2Int[] _directions = {new(0, 1), new(-1, 0), new(0, -1), new(1, 0)}; // Up, Left, Down, Right
 
     private Vector3Int _lastTile;
 
     private bool _randomize;
+    private bool _skipAlgo;
 
     private void OnDisable()
     {
@@ -27,10 +26,17 @@ public class GhostAI : MonoBehaviour
 
     private void Update()
     {
-        if (Movement.CloseToCenter && Movement.CurrentTile != _lastTile)
+        if (Movement.CloseToCenter && (Movement.CurrentTile != _lastTile || !Movement.CanMove))
         {
-            _lastTile = Movement.CurrentTile;
-            RunAlgorithm();
+            if (!_skipAlgo)
+            {
+                _lastTile = Movement.CurrentTile;
+                RunAlgorithm();   
+            }
+            else
+            {
+                _skipAlgo = false;
+            }
         }
     }
 
@@ -92,7 +98,7 @@ public class GhostAI : MonoBehaviour
         {
             Vector3Int next = Movement.CurrentTile + (Vector3Int)dir;
 
-            if (!Movement.wallsTilemap.HasTile(next) && dir != -Movement.Direction && next != DoorCell)
+            if (!Movement.wallsTilemap.HasTile(next) && dir != -Movement.Direction)
             {                
                 float distance = Vector3.Distance(Movement.wallsTilemap.CellToWorld(next), Movement.wallsTilemap.CellToWorld(_destination));
                 possible.Add(dir, distance);
@@ -104,7 +110,7 @@ public class GhostAI : MonoBehaviour
             Vector2Int reverse = -Movement.Direction;
             Vector3Int next = Movement.CurrentTile + (Vector3Int)reverse;
 
-            if (!Movement.wallsTilemap.HasTile(next) && next != DoorCell)
+            if (!Movement.wallsTilemap.HasTile(next))
             {
                 float distance = Vector3.Distance(Movement.wallsTilemap.CellToWorld(next), Movement.wallsTilemap.CellToWorld(_destination));
                 possible.Add(reverse, distance);   
@@ -124,6 +130,7 @@ public class GhostAI : MonoBehaviour
     }
     public void OnMovementDirectionFlipped()
     {
+        _skipAlgo = true;   
         _lastTile = Movement.CurrentTile;
     }
 }

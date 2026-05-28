@@ -25,11 +25,11 @@ public class GhostBase : MonoBehaviour, IGhost
 
     private void OnEnable()
     {
-        levelManager.LevelRespawnEveryone += OnLevelRespawnEveyone;
+        levelManager.LevelChanged += OnLevelChanged;
     }
     private void OnDisable()
     {
-        levelManager.LevelRespawnEveryone -= OnLevelRespawnEveyone;
+        levelManager.LevelChanged -= OnLevelChanged;
     }
 
     public virtual void Start()
@@ -84,10 +84,8 @@ public class GhostBase : MonoBehaviour, IGhost
         return _state;
     }
 
-    private void OnLevelRespawnEveyone()
+    private void OnLevelChanged(int level)
     {
-        _statesPaused = false;
-        ai.Movement.Direction = Vector2Int.up;
-        ai.Movement.SetDirection(Vector2Int.up);
+        ai.Movement.ResetDirection(Vector2Int.up);
     }
 }

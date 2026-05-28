@@ -7,6 +7,7 @@ public class Movement : MonoBehaviour
 {
     [Header("Settings")]
     public float Speed;
+    [HideInInspector] public Vector3Int blacklistedCell = new(0, 1, 0);
     [Header("References")]
     public Tilemap wallsTilemap;
     [SerializeField] private Rigidbody2D Rb2D;
@@ -14,10 +15,11 @@ public class Movement : MonoBehaviour
     [HideInInspector] public bool IsPaused;
 
     private bool _canMove;
+    [HideInInspector] public bool CanMove => _canMove;
 
     private Vector2Int _inputDirection;
 
-    private Vector2Int _direction;
+    private Vector2Int _direction = new(0, 1);
     [HideInInspector] public Vector2Int Direction
     {
         get
@@ -52,13 +54,13 @@ public class Movement : MonoBehaviour
         CloseToCenter = Vector2.Distance(transform.position, _currentTileCenter) <= 0.001f;
         if (CloseToCenter)
         {
-            if (!wallsTilemap.HasTile(_nextInputTile))
+            if (!wallsTilemap.HasTile(_nextInputTile) && _nextInputTile != blacklistedCell)
             {
                 Direction = _inputDirection;
             }
 
             _nextTile = CurrentTile + (Vector3Int)Direction;
-            _canMove = !wallsTilemap.HasTile(_nextTile);
+            _canMove = !wallsTilemap.HasTile(_nextTile) && _nextTile != blacklistedCell;
         }
         _nextTileCenter = wallsTilemap.GetCellCenterWorld(_nextTile);
     }
@@ -81,8 +83,20 @@ public class Movement : MonoBehaviour
     }
     public void FlipDirection()
     {
-        _inputDirection = -_direction;
-        Direction = -_direction; 
         MovementDirectionFlipped?.Invoke();
+        _inputDirection = -_direction;
+        Direction = -_direction;
+        _nextTile = CurrentTile + (Vector3Int)_direction;
+        _canMove = !wallsTilemap.HasTile(_nextTile) && _nextTile != blacklistedCell;
+        _nextTileCenter = wallsTilemap.GetCellCenterWorld(_nextTile);
+    }
+    public void ResetDirection(Vector2Int dir)
+    {
+        MovementDirectionFlipped?.Invoke();
+        _inputDirection = dir;
+        Direction = dir;
+        _nextTile = CurrentTile + (Vector3Int)dir;
+        _canMove = !wallsTilemap.HasTile(_nextTile) && _nextTile != blacklistedCell;
+        _nextTileCenter = wallsTilemap.GetCellCenterWorld(_nextTile);
     }
 }
