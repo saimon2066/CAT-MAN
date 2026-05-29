@@ -9,12 +9,11 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip finalDeathSound;
     [SerializeField] private PlayerManager playerManager;
     [SerializeField] private LevelManager levelManager;
-
-    private AudioSource _audioSource;
+    [SerializeField] private AudioSource audioSource;
 
     private void Awake()
     {
-        _audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -32,20 +31,20 @@ public class SoundManager : MonoBehaviour
 
     private void OnPlayerScoreChanged(int score)
     {
-        _audioSource.PlayOneShot(eatSound, 0.2f);
+        audioSource.PlayOneShot(eatSound, 0.45f);
     }
     private void OnPlayerDeath(int lives)
     {
         if (lives == 0)
-            _audioSource.PlayOneShot(finalDeathSound, 0.1f);
+            audioSource.PlayOneShot(finalDeathSound, 0.3f);
         else
-            _audioSource.PlayOneShot(deathSound, 0.1f);
+            audioSource.PlayOneShot(deathSound, 0.3f);
     }
     private void OnPlayerEnergize(bool energize)
     {
         if (energize)
         {
-            _audioSource.PlayOneShot(energizeSound, 0.2f);
+            audioSource.PlayOneShot(energizeSound, 0.4f);
         }   
     }
 }
