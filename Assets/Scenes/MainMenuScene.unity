@@ -1959,7 +1959,7 @@ Transform:
   m_GameObject: {fileID: 711163759}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: -17, z: 0}
+  m_LocalPosition: {x: 0.5, y: -12.5, z: 0}
   m_LocalScale: {x: 60, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5554,7 +5554,7 @@ ParticleSystem:
           outWeight: 0.46578997
         - serializedVersion: 3
           time: 1
-          value: 0.7800492
+          value: 0.5044602
           inSlope: 0.05531047
           outSlope: 0.05531047
           tangentMode: 0
@@ -8356,7 +8356,7 @@ ParticleSystem:
         m_RotationOrder: 4
     minKillSpeed: 0
     maxKillSpeed: 10000
-    radiusScale: 4.5
+    radiusScale: 1
     collidesWith:
       serializedVersion: 2
       m_Bits: 4294967295
