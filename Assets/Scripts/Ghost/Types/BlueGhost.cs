@@ -11,6 +11,11 @@ public class BlueGhost : GhostBase
         switch (_state)
         {
             case GhostManager.GhostState.Chase: 
+                if (_frightenedCorot != null)
+                {
+                    StopCoroutine(_frightenedCorot);
+                    _frightenedCorot = null;
+                } 
                 ai.Movement.blacklistedCell = new(0, 1, 0);
                 _isRespawning = false;
                 ai.Movement.Speed = baseSpeed;
@@ -28,6 +33,11 @@ public class BlueGhost : GhostBase
                 break;
 
             case GhostManager.GhostState.Scatter:
+                if (_frightenedCorot != null)
+                {
+                    StopCoroutine(_frightenedCorot);
+                    _frightenedCorot = null;
+                } 
                 ai.Movement.blacklistedCell = new(0, 1, 0);
                 _isRespawning = false;
                 ai.Movement.Speed = baseSpeed;
@@ -39,11 +49,16 @@ public class BlueGhost : GhostBase
                 ai.Movement.blacklistedCell = new(0, 1, 0);
                 _isRespawning = false;
                 ai.Movement.Speed = frightenedSpeed;
-                outlineRenderer.color = Color.blue;
+                _frightenedCorot ??= StartCoroutine(FrightenedColor());
                 dest = null;
                 break;
 
             case GhostManager.GhostState.Eaten:
+                if (_frightenedCorot != null)
+                {
+                    StopCoroutine(_frightenedCorot);
+                    _frightenedCorot = null;
+                } 
                 ai.Movement.Speed = eatenSpeed;
                 outlineRenderer.color = Color.white;
                 dest = ai.Movement.wallsTilemap.WorldToCell(eatenTarget.position);
@@ -59,6 +74,11 @@ public class BlueGhost : GhostBase
                 break;
 
             case GhostManager.GhostState.Leaving:
+                if (_frightenedCorot != null)
+                {
+                    StopCoroutine(_frightenedCorot);
+                    _frightenedCorot = null;
+                } 
                 ai.Movement.blacklistedCell = new(0, 100, 0);
                 ai.Movement.Speed = baseSpeed;
                 outlineRenderer.color = Color.white;

@@ -7,6 +7,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip energizeSound;
     [SerializeField] private AudioClip deathSound;
     [SerializeField] private AudioClip finalDeathSound;
+    [SerializeField] private AudioClip winSound;
     [SerializeField] private PlayerManager playerManager;
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private AudioSource audioSource;
@@ -21,12 +22,14 @@ public class SoundManager : MonoBehaviour
         playerManager.PlayerScoreChanged += OnPlayerScoreChanged;
         playerManager.PlayerDeath += OnPlayerDeath;
         playerManager.PlayerEnergize += OnPlayerEnergize;
+        levelManager.LevelChanged += OnLevelChanged;
     }
     private void OnDisable()
     {
         playerManager.PlayerScoreChanged -= OnPlayerScoreChanged;
         playerManager.PlayerDeath -= OnPlayerDeath;
         playerManager.PlayerEnergize -= OnPlayerEnergize;
+        levelManager.LevelChanged -= OnLevelChanged;
     }
 
     private void OnPlayerScoreChanged(int score)
@@ -46,5 +49,12 @@ public class SoundManager : MonoBehaviour
         {
             audioSource.PlayOneShot(energizeSound, 0.4f);
         }   
+    }
+    private void OnLevelChanged(int level)
+    {
+        if (level != 1)
+        {
+            audioSource.PlayOneShot(winSound, 0.7f);
+        }
     }
 }

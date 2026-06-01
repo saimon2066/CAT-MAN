@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour
 
     [HideInInspector] public List<Item> SpawnedItems = new();
 
-    private int _currentLevel;
+    public int CurrentLevel;
     private int _levelEndScore;
 
     private int _fruitSpawned;
@@ -60,17 +60,17 @@ public class LevelManager : MonoBehaviour
     private void NextLevel()
     {
         _fruitSpawned = 0;
-        _currentLevel++;
+        CurrentLevel++;
 
         SpawnItems();
         RespawnEveryone();
 
-        LevelChanged?.Invoke(_currentLevel);
+        LevelChanged?.Invoke(CurrentLevel);
     }
     private void LevelFail()
     {
         LevelFailed?.Invoke();
-        _currentLevel = 0;
+        CurrentLevel = 0;
     }
     private void SetMovementPaused(bool isPaused)
     {
@@ -120,7 +120,7 @@ public class LevelManager : MonoBehaviour
     {
         _fruitSpawned++;
         
-        int i = Mathf.Clamp(_currentLevel - 1, 0, fruits.Length);
+        int i = Mathf.Clamp(CurrentLevel - 1, 0, fruits.Length);
 
         GameObject obj = Instantiate(itemPrefab, fruitSpawn.position, Quaternion.identity, fruitSpawn);
         Item item = obj.GetComponent<Item>();
@@ -194,7 +194,7 @@ public class LevelManager : MonoBehaviour
         RespawnEveryone();
         yield return _wait2sec;
         SetMovementPaused(false);
-        LevelChanged?.Invoke(_currentLevel);
+        LevelChanged?.Invoke(CurrentLevel);
     }
     private IEnumerator LevelFailCorot()
     {

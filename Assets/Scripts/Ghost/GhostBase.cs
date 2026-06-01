@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -22,6 +23,8 @@ public class GhostBase : MonoBehaviour, IGhost
     protected GhostManager.GhostState _futureState;
     protected bool _statesPaused;
     protected bool _isRespawning;
+
+    protected Coroutine _frightenedCorot = null;
 
     private void OnEnable()
     {
@@ -87,5 +90,20 @@ public class GhostBase : MonoBehaviour, IGhost
     private void OnLevelChanged(int level)
     {
         ai.Movement.ResetDirection(Vector2Int.up);
+    }
+
+    protected IEnumerator FrightenedColor()
+    {
+        outlineRenderer.color = Color.blue;
+        yield return new WaitForSeconds(4f);
+        outlineRenderer.color = Color.white;
+        yield return new WaitForSeconds(0.5f);
+        outlineRenderer.color = Color.blue;
+        yield return new WaitForSeconds(0.5f);
+        outlineRenderer.color = Color.white;
+        yield return new WaitForSeconds(0.5f);
+        outlineRenderer.color = Color.blue;
+        yield return new WaitForSeconds(0.5f);
+        outlineRenderer.color = Color.white;
     }
 }
