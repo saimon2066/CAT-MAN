@@ -25,7 +25,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Movement[] movements;
 
     public event Action<int> LevelChanged;
-    public event Action LevelFailed;
     public event Action LevelRespawnEveryone;
 
     [HideInInspector] public List<Item> SpawnedItems = new();
@@ -69,7 +68,6 @@ public class LevelManager : MonoBehaviour
     }
     private void LevelFail()
     {
-        LevelFailed?.Invoke();
         CurrentLevel = 0;
     }
     private void SetMovementPaused(bool isPaused)

@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class VersionUI : MonoBehaviour
+public class UIVersion : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI display;
 
