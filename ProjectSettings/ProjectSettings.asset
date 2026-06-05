@@ -41,7 +41,7 @@ PlayerSettings:
     height: 1
   m_SplashScreenLogos:
   - logo: {fileID: -1440574221046528544, guid: dbfd3b38f3388f94ba1b24241e3e035f, type: 3}
-    duration: 2
+    duration: 10
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1920
@@ -145,7 +145,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: v1.0.2
+  bundleVersion: v1.0.21
   preloadedAssets:
   - {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   metroInputSource: 0
