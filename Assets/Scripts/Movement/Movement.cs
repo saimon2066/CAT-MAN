@@ -29,7 +29,6 @@ public class Movement : MonoBehaviour
         set
         {
             _direction = value;
-
             if (!IsPaused)
                 MovementDirectionChanged?.Invoke(_direction);
         }

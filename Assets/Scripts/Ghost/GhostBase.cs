@@ -3,7 +3,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class GhostBase : MonoBehaviour, IGhost
+public abstract class GhostBase : MonoBehaviour, IGhost
 {
     [Header("Settings")]
     [SerializeField] protected Color color;
@@ -23,6 +23,7 @@ public class GhostBase : MonoBehaviour, IGhost
     protected GhostManager.GhostState _futureState;
     protected bool _statesPaused;
     protected bool _isRespawning;
+    protected bool _flashing;
 
     protected Coroutine _frightenedCorot = null;
 
@@ -39,6 +40,109 @@ public class GhostBase : MonoBehaviour, IGhost
     { 
         collarRenderer.color = collarColor;   
     }
+    public virtual void Update()
+    {
+        Vector3Int? dest = null;
+        switch (_state)
+        {
+            case GhostManager.GhostState.Chase:
+                _flashing = false;
+                if (_frightenedCorot != null)
+                {
+                    StopCoroutine(_frightenedCorot);
+                    _frightenedCorot = null;
+                } 
+                ai.Movement.blacklistedCell = new(0, 1, 0);
+                _isRespawning = false;
+                ai.Movement.Speed = baseSpeed;
+                outlineRenderer.color = color;
+                dest = GetDestination();
+                break;
+
+            case GhostManager.GhostState.Scatter:
+                _flashing = false;
+                if (_frightenedCorot != null)
+                {
+                    StopCoroutine(_frightenedCorot);
+                    _frightenedCorot = null;
+                }                 
+                ai.Movement.blacklistedCell = new(0, 1, 0);
+                _isRespawning = false;
+                ai.Movement.Speed = baseSpeed;
+                outlineRenderer.color = color;
+                dest = ai.Movement.wallsTilemap.WorldToCell(scatterTarget.position);
+                break;
+
+            case GhostManager.GhostState.Frightened:
+                _isRespawning = false;
+                ai.Movement.Speed = frightenedSpeed;
+                if (_frightenedCorot != null && !_flashing)
+                {
+                    StopCoroutine(_frightenedCorot);
+                    _frightenedCorot = null;
+                }
+                _frightenedCorot ??= StartCoroutine(FrightenedColor());
+                dest = null;
+                break;
+
+            case GhostManager.GhostState.Eaten:
+                _flashing = false;
+                if (_frightenedCorot != null)
+                {
+                    StopCoroutine(_frightenedCorot);
+                    _frightenedCorot = null;
+                } 
+                ai.Movement.Speed = eatenSpeed;
+                outlineRenderer.color = Color.white;
+                dest = ai.Movement.wallsTilemap.WorldToCell(eatenTarget.position);
+                if (!_isRespawning)
+                {
+                ai.Movement.blacklistedCell = new(0, 100, 0);
+                    if (ai.Movement.CurrentTile == dest)
+                    {
+                        _isRespawning = true;   
+                        SetState(GhostManager.GhostState.Leaving, true);              
+                    }
+                }
+                break;
+
+            case GhostManager.GhostState.Leaving:
+                _flashing = false;
+                if (_frightenedCorot != null)
+                {
+                    StopCoroutine(_frightenedCorot);
+                    _frightenedCorot = null;
+                } 
+                ai.Movement.blacklistedCell = new(0, 100, 0);
+                ai.Movement.Speed = baseSpeed;
+                outlineRenderer.color = Color.white;
+                dest = ai.Movement.wallsTilemap.WorldToCell(leavingTarget.position);
+                if (ai.Movement.CurrentTile == dest)
+                {
+                    ai.Movement.blacklistedCell = new(0, 1, 0);
+                    SetPaused(false);
+                    _isRespawning = false;
+                }
+                break;
+
+            case GhostManager.GhostState.None:
+                return;
+        }
+
+        ai.SetRandomization(_state == GhostManager.GhostState.Frightened);
+
+        if (dest != null)
+        {
+            ai.SetDestination((Vector3Int)dest);
+
+            if (showDebug)
+            {
+                Debug.DrawLine(ai.Movement.CurrentTile, (Vector3Int)dest, color, Time.deltaTime);                
+            }
+        }
+    }
+
+    public abstract Vector3Int? GetDestination();
 
     public void SetState(GhostManager.GhostState state, bool isForced, GhostManager.GhostState[] ignoreStates = null)
     {
@@ -96,6 +200,7 @@ public class GhostBase : MonoBehaviour, IGhost
     {
         outlineRenderer.color = Color.blue;
         yield return new WaitForSeconds(4f);
+        _flashing = true;
         outlineRenderer.color = Color.white;
         yield return new WaitForSeconds(0.5f);
         outlineRenderer.color = Color.blue;
@@ -105,5 +210,7 @@ public class GhostBase : MonoBehaviour, IGhost
         outlineRenderer.color = Color.blue;
         yield return new WaitForSeconds(0.5f);
         outlineRenderer.color = Color.white;
+        _flashing = false;
+        _frightenedCorot = null;
     }
 }
