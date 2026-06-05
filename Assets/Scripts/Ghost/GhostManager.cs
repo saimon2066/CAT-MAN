@@ -77,16 +77,15 @@ public class GhostManager : MonoBehaviour
     }
     private void OnPlayerEnergize(bool energize)
     {
-        List<GhostState> ignoreStates = new() {GhostState.Eaten, GhostState.Leaving, GhostState.Frightened};
+        GhostState[] ignoreStates = {GhostState.Eaten, GhostState.Leaving};
         if (energize)
         {
-            SetGhostStates(GhostState.Frightened, false, ignoreStates.ToArray());
+            SetGhostStates(GhostState.Frightened, false, ignoreStates);
             SetGhostPaused(true);
         }
         else
         {
-            ignoreStates.Remove(GhostState.Frightened);
-            SetGhostPaused(false, ignoreStates.ToArray());
+            SetGhostPaused(false, ignoreStates);
         }
     }
 

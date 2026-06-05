@@ -76,11 +76,6 @@ public abstract class GhostBase : MonoBehaviour, IGhost
             case GhostManager.GhostState.Frightened:
                 _isRespawning = false;
                 ai.Movement.Speed = frightenedSpeed;
-                if (_frightenedCorot != null && !_flashing)
-                {
-                    StopCoroutine(_frightenedCorot);
-                    _frightenedCorot = null;
-                }
                 _frightenedCorot ??= StartCoroutine(FrightenedColor());
                 dest = null;
                 break;
@@ -146,8 +141,29 @@ public abstract class GhostBase : MonoBehaviour, IGhost
 
     public void SetState(GhostManager.GhostState state, bool isForced, GhostManager.GhostState[] ignoreStates = null)
     {
+        if (_state == GhostManager.GhostState.Frightened && state == GhostManager.GhostState.Frightened)
+        {
+            if (_frightenedCorot != null)
+            {
+                StopCoroutine(_frightenedCorot);
+                _frightenedCorot = null;
+            }
+            _flashing = false;
+            return;
+        }
+
         if (ignoreStates == null || !ignoreStates.Contains(_state))
         {
+            if (state == GhostManager.GhostState.Frightened)
+            {
+                if (_frightenedCorot != null)
+                {
+                    StopCoroutine(_frightenedCorot);
+                    _frightenedCorot = null;
+                }
+                _flashing = false;
+            }
+
             if (isForced)
             {
                 if (_state != GhostManager.GhostState.Leaving) ai.Movement.FlipDirection();
