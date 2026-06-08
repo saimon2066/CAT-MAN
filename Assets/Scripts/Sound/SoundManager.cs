@@ -12,6 +12,8 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private AudioSource audioSource;
 
+    private int _currentLevel;
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -34,7 +36,7 @@ public class SoundManager : MonoBehaviour
 
     private void OnPlayerScoreChanged(int score)
     {
-        audioSource.PlayOneShot(eatSound, 0.45f);
+        audioSource.PlayOneShot(eatSound, 0.5f);
     }
     private void OnPlayerDeath(int lives)
     {
@@ -52,9 +54,10 @@ public class SoundManager : MonoBehaviour
     }
     private void OnLevelChanged(int level)
     {
-        if (level != 1)
+        if (level != 1 && level != _currentLevel)
         {
-            audioSource.PlayOneShot(winSound, 0.7f);
+            audioSource.PlayOneShot(winSound, 0.9f);
+            _currentLevel = levelManager.CurrentLevel;
         }
     }
 }

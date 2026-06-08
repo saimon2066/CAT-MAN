@@ -19,11 +19,11 @@ public class UISettings : MonoBehaviour
     public void SetGameVolume(float volume)
     {
         PlayerPrefs.SetFloat("GameVolume", volume);
-        gameMixer.SetFloat("Volume", Mathf.Log(volume) * 20);
+        gameMixer.SetFloat("Volume", Mathf.Log10(volume) * 20);
     }
     public void SetMusicVolume(float volume)
     {
         PlayerPrefs.SetFloat("MusicVolume", volume);
-        musicMixer.SetFloat("Volume", Mathf.Log(volume) * 20);
+        musicMixer.SetFloat("Volume", Mathf.Log10(volume) * 20);
     }
 }
