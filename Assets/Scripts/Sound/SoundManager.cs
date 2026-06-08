@@ -36,20 +36,20 @@ public class SoundManager : MonoBehaviour
 
     private void OnPlayerScoreChanged(int score)
     {
-        audioSource.PlayOneShot(eatSound, 0.5f);
+        audioSource.PlayOneShot(eatSound, 0.75f);
     }
     private void OnPlayerDeath(int lives)
     {
         if (lives == 0)
-            audioSource.PlayOneShot(finalDeathSound, 0.3f);
+            audioSource.PlayOneShot(finalDeathSound, 0.2f);
         else
-            audioSource.PlayOneShot(deathSound, 0.3f);
+            audioSource.PlayOneShot(deathSound, 0.4f);
     }
     private void OnPlayerEnergize(bool energize)
     {
         if (energize)
         {
-            audioSource.PlayOneShot(energizeSound, 0.4f);
+            audioSource.PlayOneShot(energizeSound, 0.65f);
         }   
     }
     private void OnLevelChanged(int level)
