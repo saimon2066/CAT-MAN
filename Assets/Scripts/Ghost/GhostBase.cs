@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class GhostBase : MonoBehaviour, IGhost

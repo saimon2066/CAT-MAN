@@ -87,6 +87,7 @@ public class LevelManager : MonoBehaviour
         if (_fruitCorot != null) StopCoroutine(_fruitCorot);
         if (_currentFruit) _currentFruit.Pickup();
         _currentFruit = null;
+        _fruitCorot = null;
 
         foreach (Transform spawn in pelletSpawns)
         {
@@ -130,7 +131,7 @@ public class LevelManager : MonoBehaviour
         item.DoesEnergize = fruits[i].DoesEnergize;
 
         _currentFruit = item;
-        _fruitCorot ??= StartCoroutine(FruitSpawnCorot(item));
+        _fruitCorot ??= StartCoroutine(FruitSpawnCorot());
     }
     private void RespawnEveryone()
     {
@@ -203,9 +204,9 @@ public class LevelManager : MonoBehaviour
         SetMovementPaused(false);
         NextLevel();
     }
-    private IEnumerator FruitSpawnCorot(Item fruit)
+    private IEnumerator FruitSpawnCorot()
     {
         yield return _wait9sec;
-        if (fruit) fruit.Pickup();
+        if (_currentFruit) _currentFruit.Pickup();
     }
 }

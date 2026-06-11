@@ -15,4 +15,4 @@ MonoBehaviour:
   DisplayName: CherryFish
   Score: 100
   DoesEnergize: 0
-  Sprite: {fileID: -8701883174475674796, guid: 13949bbfc13f771478481f66dd9cd107, type: 3}
+  Sprite: {fileID: 8129712497657681775, guid: 3d5328310c249d44396831f998d1e6ee, type: 3}
