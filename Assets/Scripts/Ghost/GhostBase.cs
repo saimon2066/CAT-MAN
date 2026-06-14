@@ -6,17 +6,19 @@ public abstract class GhostBase : MonoBehaviour, IGhost
 {
     [Header("Settings")]
     [SerializeField] protected Color color;
-    [SerializeField] private Color collarColor;
+    [SerializeField] protected Color collarColor;
     [SerializeField] protected Transform scatterTarget;
     [SerializeField] protected Transform eatenTarget;
     [SerializeField] protected Transform leavingTarget;
     [SerializeField] protected float baseSpeed, eatenSpeed, frightenedSpeed;
     [SerializeField] protected bool showDebug;
     [Header("References")]
+    [SerializeField] private GameObject debugObject;
     [SerializeField] protected GhostAI ai;
     [SerializeField] private LevelManager levelManager;
     [SerializeField] protected SpriteRenderer collarRenderer;
     [SerializeField] protected SpriteRenderer outlineRenderer;
+    [SerializeField] private LineRenderer lineRenderer;
 
     protected GhostManager.GhostState _state;
     protected GhostManager.GhostState _futureState;
@@ -26,11 +28,11 @@ public abstract class GhostBase : MonoBehaviour, IGhost
 
     protected Coroutine _frightenedCorot = null;
 
-    private void OnEnable()
+    public virtual void OnEnable()
     {
         levelManager.LevelChanged += OnLevelChanged;
     }
-    private void OnDisable()
+    public virtual void OnDisable()
     {
         levelManager.LevelChanged -= OnLevelChanged;
     }
@@ -38,6 +40,12 @@ public abstract class GhostBase : MonoBehaviour, IGhost
     public virtual void Start()
     { 
         collarRenderer.color = collarColor;   
+
+        lineRenderer.positionCount = 2;
+        lineRenderer.startColor = color;
+        lineRenderer.endColor = collarColor;
+        lineRenderer.startWidth = 0.15f;
+        lineRenderer.endWidth = 0.05f;
     }
     public virtual void Update()
     {
@@ -128,11 +136,27 @@ public abstract class GhostBase : MonoBehaviour, IGhost
         if (dest != null)
         {
             ai.SetDestination((Vector3Int)dest);
-
             if (showDebug)
             {
-                Debug.DrawLine(ai.Movement.CurrentTile, (Vector3Int)dest, color, Time.deltaTime);                
+                Vector3 pos = ai.Movement.wallsTilemap.GetCellCenterWorld((Vector3Int)dest);
+
+                lineRenderer.enabled = true;
+                lineRenderer.SetPosition(0, ai.Movement.wallsTilemap.GetCellCenterWorld(ai.Movement.CurrentTile));
+                lineRenderer.SetPosition(1, pos);
+
+                debugObject.SetActive(true);
+                debugObject.transform.position = pos;
             }
+            else 
+            {
+                lineRenderer.enabled = false; 
+                debugObject.SetActive(false);
+            }
+        }
+        else 
+        {
+            lineRenderer.enabled = false; 
+            debugObject.SetActive(false);
         }
     }
 
