@@ -269,7 +269,6 @@ GameObject:
   - component: {fileID: 45291278}
   - component: {fileID: 45291276}
   - component: {fileID: 45291277}
-  - component: {fileID: 45291280}
   - component: {fileID: 45291281}
   m_Layer: 5
   m_Name: CreditsButton
@@ -422,20 +421,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 45291274}
   m_CullTransparentMesh: 1
---- !u!114 &45291280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 45291274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eae62f33abeb5174aaa1972587c41489, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ButtonArrows
-  baseText: Credits
-  textDisplay: {fileID: 359983365}
 --- !u!114 &45291281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -636,7 +621,6 @@ GameObject:
   - component: {fileID: 183339607}
   - component: {fileID: 183339611}
   - component: {fileID: 183339610}
-  - component: {fileID: 183339612}
   - component: {fileID: 183339613}
   m_Layer: 5
   m_Name: PlayButton
@@ -776,20 +760,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &183339612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 183339605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eae62f33abeb5174aaa1972587c41489, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ButtonArrows
-  baseText: Play
-  textDisplay: {fileID: 24834322}
 --- !u!114 &183339613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -867,7 +837,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 100
@@ -2948,7 +2918,6 @@ GameObject:
   - component: {fileID: 1092482041}
   - component: {fileID: 1092482043}
   - component: {fileID: 1092482044}
-  - component: {fileID: 1092482045}
   - component: {fileID: 1092482046}
   m_Layer: 5
   m_Name: SettingsButton
@@ -3101,20 +3070,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ButtonFrameAnimation
   parameter: isOpened
   animator: {fileID: 500620032}
---- !u!114 &1092482045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1092482038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eae62f33abeb5174aaa1972587c41489, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ButtonArrows
-  baseText: Settings
-  textDisplay: {fileID: 1315576202}
 --- !u!114 &1092482046
 MonoBehaviour:
   m_ObjectHideFlags: 0
