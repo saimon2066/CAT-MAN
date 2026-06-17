@@ -3123,7 +3123,7 @@ MonoBehaviour:
   baseSpeed: 4.5
   eatenSpeed: 5
   frightenedSpeed: 4
-  showDebug: 0
+  showDebug: 1
   debugObject: {fileID: 1043090886}
   ai: {fileID: 245500406}
   levelManager: {fileID: 1997426675237007849}
@@ -8737,7 +8737,7 @@ MonoBehaviour:
   baseSpeed: 4.5
   eatenSpeed: 5
   frightenedSpeed: 4
-  showDebug: 0
+  showDebug: 1
   debugObject: {fileID: 1937503511}
   ai: {fileID: 706471767}
   levelManager: {fileID: 1997426675237007849}
@@ -11365,7 +11365,7 @@ MonoBehaviour:
   baseSpeed: 4.5
   eatenSpeed: 5
   frightenedSpeed: 4
-  showDebug: 0
+  showDebug: 1
   debugObject: {fileID: 495348603}
   ai: {fileID: 1115658931}
   levelManager: {fileID: 1997426675237007849}
@@ -15606,7 +15606,7 @@ MonoBehaviour:
   baseSpeed: 4.5
   eatenSpeed: 5
   frightenedSpeed: 4
-  showDebug: 0
+  showDebug: 1
   debugObject: {fileID: 14077736}
   ai: {fileID: 1931492504}
   levelManager: {fileID: 1997426675237007849}

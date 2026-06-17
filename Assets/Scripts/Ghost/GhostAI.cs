@@ -13,31 +13,16 @@ public class GhostAI : MonoBehaviour
     private Vector3Int _lastTile;
 
     private bool _randomize;
-    private bool _skipAlgo;
 
     private void OnDisable()
     {
         Movement.MovementDirectionFlipped -= OnMovementDirectionFlipped;
+        Movement.MovementCloseToCenter -= OnMovementCloseToCenter;
     }
     private void OnEnable()
     {
         Movement.MovementDirectionFlipped += OnMovementDirectionFlipped;
-    }
-
-    private void Update()
-    {
-        if (Movement.CloseToCenter && (Movement.CurrentTile != _lastTile || !Movement.CanMove))
-        {
-            if (!_skipAlgo)
-            {
-                _lastTile = Movement.CurrentTile;
-                RunAlgorithm();   
-            }
-            else
-            {
-                _skipAlgo = false;
-            }
-        }
+        Movement.MovementCloseToCenter += OnMovementCloseToCenter;
     }
 
     private void RunAlgorithm()
@@ -52,42 +37,16 @@ public class GhostAI : MonoBehaviour
         }
         else
         {
-            Dictionary<Vector2Int, float> possibleDirectionsByDistance = new();
+            float min = possibleDirectionsAndDistance.Values.Min();
 
-            foreach (var DirDist in possibleDirectionsAndDistance)
+            foreach (Vector2Int dir in _directions)
             {
-                float distanceCurrent = Vector3.Distance(Movement.wallsTilemap.CellToWorld(Movement.CurrentTile), Movement.wallsTilemap.CellToWorld(_destination));
-                if (DirDist.Value <= distanceCurrent)
+                if (possibleDirectionsAndDistance.TryGetValue(dir, out float distance) && distance == min)
                 {
-                    possibleDirectionsByDistance.Add(DirDist.Key, DirDist.Value);
-                }
-            }
-
-            if (possibleDirectionsByDistance.Count > 0)
-            {
-                float min = possibleDirectionsByDistance.Values.Min(); // get minimum value (distnace) of the tile in the dictionary
-                var allMinimum = possibleDirectionsByDistance.Where(dictionary => dictionary.Value == min).Select(dictionary => dictionary.Key); // get all keys in the dictionary where their values are equal to the minimum value
-
-                foreach (Vector2Int dir in _directions)
-                {
-                    if (allMinimum.Contains(dir))
-                    {
-                        Movement.SetDirection(dir);
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                foreach (Vector2Int dir in _directions)
-                {
-                    if (possibleDirectionsAndDistance.Keys.Contains(dir))
-                    {
-                        Movement.SetDirection(dir);
-                        break;  
-                    }   
+                    Movement.SetDirection(dir);
+                    break;  
                 }   
-            }
+            }   
         }
     }
     private Dictionary<Vector2Int, float> GetPossibleDirectionsAndDistance()
@@ -100,7 +59,7 @@ public class GhostAI : MonoBehaviour
 
             if (!Movement.wallsTilemap.HasTile(next) && dir != -Movement.Direction)
             {                
-                float distance = Vector3.Distance(Movement.wallsTilemap.CellToWorld(next), Movement.wallsTilemap.CellToWorld(_destination));
+                float distance = (next - _destination).sqrMagnitude;
                 possible.Add(dir, distance);
             }
         }
@@ -112,7 +71,7 @@ public class GhostAI : MonoBehaviour
 
             if (!Movement.wallsTilemap.HasTile(next))
             {
-                float distance = Vector3.Distance(Movement.wallsTilemap.CellToWorld(next), Movement.wallsTilemap.CellToWorld(_destination));
+                float distance = (next - _destination).sqrMagnitude;
                 possible.Add(reverse, distance);   
             }
         }
@@ -128,9 +87,16 @@ public class GhostAI : MonoBehaviour
     {
         _randomize = randomize;
     }
-    public void OnMovementDirectionFlipped()
+    private void OnMovementDirectionFlipped()
     {
-        _skipAlgo = true;   
         _lastTile = Movement.CurrentTile;
+    }
+    private void OnMovementCloseToCenter()
+    {
+        if (Movement.CurrentTile != _lastTile || !Movement.CanMove)
+        {
+            _lastTile = Movement.CurrentTile;
+            RunAlgorithm();
+        }
     }
 }

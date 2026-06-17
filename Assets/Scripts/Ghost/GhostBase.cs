@@ -232,7 +232,7 @@ public abstract class GhostBase : MonoBehaviour, IGhost
 
     private void OnLevelChanged(int level)
     {
-        ai.Movement.ResetDirection(Vector2Int.up);
+       ai.Movement.ResetDirection(Vector2Int.up);
     }
 
     protected IEnumerator FrightenedColor()

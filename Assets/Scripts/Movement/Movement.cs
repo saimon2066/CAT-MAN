@@ -43,16 +43,21 @@ public class Movement : MonoBehaviour
     [HideInInspector] public bool CloseToCenter;
     public event Action<Vector2Int> MovementDirectionChanged;
     public event Action MovementDirectionFlipped;
+    public event Action MovementCloseToCenter;
+    private bool _CloseToCenterFired;
 
     private void Update()
     {
-        CurrentTile = wallsTilemap.WorldToCell(transform.position);
+        CurrentTile = wallsTilemap.WorldToCell(Rb2D.position);
         _currentTileCenter = wallsTilemap.GetCellCenterWorld(CurrentTile);
 
         _nextInputTile = CurrentTile + (Vector3Int)_inputDirection;
-        CloseToCenter = Vector2.Distance(transform.position, _currentTileCenter) <= 0.001f;
+        CloseToCenter = Vector2.Distance(Rb2D.position, _currentTileCenter) <= Speed * Time.fixedDeltaTime;
         if (CloseToCenter)
         {
+            if (!_CloseToCenterFired || !_canMove) MovementCloseToCenter?.Invoke();
+            _CloseToCenterFired = true;
+
             if (!wallsTilemap.HasTile(_nextInputTile) && _nextInputTile != blacklistedCell)
             {
                 Direction = _inputDirection;
@@ -61,6 +66,7 @@ public class Movement : MonoBehaviour
             _nextTile = CurrentTile + (Vector3Int)Direction;
             _canMove = !wallsTilemap.HasTile(_nextTile) && _nextTile != blacklistedCell;
         }
+        else _CloseToCenterFired = false;
         _nextTileCenter = wallsTilemap.GetCellCenterWorld(_nextTile);
     }
     private void FixedUpdate()
